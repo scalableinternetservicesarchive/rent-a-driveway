@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   post '/' => 'welcome#search_location'
-  post '/welcome/index' => 'welcome#search_location', as: :/
+  get '/get_listings' => 'welcome#search_listings', as: :/
 
 
     
