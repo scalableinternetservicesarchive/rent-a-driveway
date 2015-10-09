@@ -1,0 +1,44 @@
+
+<%#This script is for google map api and figure out the current long lat%>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFmR4HMCaMUYeUdjudpsJ2EZZIOGOngps&signed_in=true"></script>
+<script src="/js/google_map_geocode.js"></script>
+
+<div class="row">
+    <h2>
+        Hello cutie, where are you looking to park your precious car?
+    </h2>
+</div>
+
+<!-- This form is not supposed to post anything
+    Instead, we use jquery to intercept, perform geocode search
+    Then update the map below to show available listings
+    For more info look for js/search_location.js
+-->
+<form method="post" id="search_location_form" action="" >
+    <div class="row">
+        <label for="location">Location:</label>
+        <input class="form-control" type="text" id="location_input" name="location"></input>
+        <input type="hidden" id="longitude" name="longitude"></input>
+        <input type="hidden" id="latitude" name="latitude"></input>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <label for="start_time">Start time:</label>
+            <input class="form-control" type="text" name="start_time"></input>
+        </div>
+        <div class="col-md-3">
+            <label for="end_time">End time:</label>
+            <input class="form-control" type="text" name="end_time"></input>
+        </div>
+    </div>
+    <br/>
+
+    <div class="row">
+        <button type="submit" class="btn btn-primary btn-large">Search</button>
+    </div>
+</form>
+
+
+<script src="/js/search_location.js"></script>
+
