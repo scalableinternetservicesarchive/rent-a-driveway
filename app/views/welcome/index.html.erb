@@ -1,4 +1,6 @@
 
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <%#This script is for google map api and figure out the current long lat%>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFmR4HMCaMUYeUdjudpsJ2EZZIOGOngps&signed_in=true"></script>
 <script src="/js/google_map_geocode.js"></script>
@@ -40,6 +42,11 @@
 </form>
 
 <div id="map" style="height: 500px;"></div>
+
+<script>
+    $("#start_time").datepicker();
+    $("#end_time").datepicker();
+</script>
 
 <script src="/js/search_location.js"></script>
 
