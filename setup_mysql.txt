@@ -1,0 +1,8 @@
+To set up mysql on your computer:
+    1. sudo apt-get install mysql-server mysql-client libmysqlclient-dev
+    2. sudo mysql --user=root -p
+    3. CREATE USER 'mysql_root'@'localhost' IDENTIFIED BY 'mysql_root';
+    4. GRANT ALL PRIVILEGES ON *.* TO 'mysql_root'@'localhost' WITH GRANT OPTION;
+    5. exit
+    6. bin/rake db:create
+    
