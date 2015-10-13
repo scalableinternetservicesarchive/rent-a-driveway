@@ -7,7 +7,12 @@
 
 <div class="row">
     <h2>
-        Hello cutie, where are you looking to park your precious car?
+        <% if current_user.try(:is_seller) %>
+        I am a Seller!
+        <% end %>
+        <% if current_user.try(:is_buyer) %>
+        I am a Buyer!
+        <% end %>
     </h2>
 </div>
 

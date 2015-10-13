@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+ .alert-alert {
+ 	@extend .alert-warning;
+ }
+
+ .alert-notice {
+ 	@extend .alert-info;
+ }

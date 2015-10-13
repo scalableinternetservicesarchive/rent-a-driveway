@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   #root 'submissions#index'
   get 'welcome/index'
   root 'welcome#index'
@@ -6,8 +7,7 @@ Rails.application.routes.draw do
   post '/' => 'welcome#search_location'
   get '/get_listings' => 'welcome#search_listings', as: :/
 
-
-    
+  get '/users/sign_up' => 'login#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
