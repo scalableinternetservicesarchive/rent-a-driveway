@@ -11,9 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151012071426) do
+ActiveRecord::Schema.define(version: 20151011061007) do
 
   create_table "users", force: :cascade do |t|
+    t.string   "first_name",             limit: 255
+    t.string   "last_name",              limit: 255
+    t.boolean  "is_admin",                           default: false
+    t.boolean  "is_buyer",                           default: false
+    t.boolean  "is_seller",                          default: false
     t.string   "email",                  limit: 255, default: "",    null: false
     t.string   "encrypted_password",     limit: 255, default: "",    null: false
     t.string   "reset_password_token",   limit: 255
@@ -33,11 +38,6 @@ ActiveRecord::Schema.define(version: 20151012071426) do
     t.datetime "locked_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_admin",                           default: false
-    t.boolean  "is_buyer",                           default: false
-    t.boolean  "is_seller",                          default: false
-    t.string   "first_name",             limit: 255
-    t.string   "last_name",              limit: 255
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
