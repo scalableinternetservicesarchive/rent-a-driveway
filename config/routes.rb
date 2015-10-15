@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :listings
+
   devise_for :users
   #root 'submissions#index'
   get 'welcome/index'

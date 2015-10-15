@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  owner: MyString
+  address: MyString
+  start_time: 2015-10-14 14:27:03
+  end_time: 2015-10-14 14:27:03
+  longitude: 1.5
+  latitude: 1.5
+  price: 1.5
+
+two:
+  owner: MyString
+  address: MyString
+  start_time: 2015-10-14 14:27:03
+  end_time: 2015-10-14 14:27:03
+  longitude: 1.5
+  latitude: 1.5
+  price: 1.5
