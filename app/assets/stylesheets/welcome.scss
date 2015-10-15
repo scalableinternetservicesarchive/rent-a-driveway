@@ -80,128 +80,6 @@ font-size : 1.2em;
 .bold {
 font-weight : bold;
 }
-#header h1 {
-background : #fafafa;
-font-family : "Tahoma", Verdana, Arial, sans-serif;
-font-size : 3em;
-color : #585858;
-font-weight : normal;
-padding : 0;
-margin : 0;
-}
-#content {
-padding : 0;
-margin : 15px auto;
-width : 780px;
-background : #fafafa;
-}
-#header {
-margin : 0;
-padding : 0;
-width : 100%;
-background : inherit;
-color : #585858;
-height : 66px;
-}
-#header .slogan {
-color : #868686;
-margin : 0;
-padding : 0;
-background : #fafafa;
-font : bold 1em "Tahoma", Verdana, Arial, sans-serif;
-padding-left : 2px;
-}
-#header .topong {
-background : #fafafa url(topaff.jpg) no-repeat bottom;
-height : 66px;
-width : 159px;
-float : right;
-}
-#header .topong .pad {
-padding : 15px 5px 0 30px;
-}
-#header .topong .txt {
-padding : 0;
-color : #a5a5a5;
-}
-#header h4 {
-font : bold 1em "Tahoma", verdana, Arial;
-}
-#header h4 a {
-color : #585858;
-}
-#header h4 a:hover {
-text-decoration : none;
-}
-#menu {
-margin : 0 0;
-padding : 0;
-background : #4b7da7 url(menubg.gif) repeat-x top;
-color : #fff;
-width : 100%;
-height : 40px;
-}
-#menu .pad {
-padding-top : 12px;
-}
-#menu a, #menu a:visited {
-color : #fff;
-text-decoration : none;
-background : inherit;
-}
-#menu .submit {
-vertical-align : bottom;
-}
-#menu .submit ul {
-margin : 0;
-padding : 0 10px 0 0;
-list-style : none;
-}
-#menu .submit li {
-display : inline;
-margin : 0;
-padding : 0;
-}
-#menu .submit a {
-float : left;
-background : transparent;
-margin : 0;
-padding : 0 0 0 0;
-text-decoration : none;
-}
-#menu .submit a span {
-float : left;
-background : url(menusep.gif) no-repeat left;
-color : #fff;
-font-weight : bold;
-display : block;
-padding : 0 15px 0 15px;
-margin-right : 2px;
-}
-#menu .submit a span {
-float : none;
-}
-#menu #search {
-float : right;
-background : inherit;
-margin-top : 0;
-padding : 0;
-margin-right : 10px;
-margin-top : -4px;
-}
-#menu #search input.text {
-background : url(input.gif) no-repeat top;
-width : 110px;
-border : 0;
-padding : 2px 0 0 3px;
-}
-#menu #search input.txt {
-color : #fff;
-font-weight : bold;
-border : 0;
-background : transparent;
-cursor : pointer;
-}
 #modules {
 margin-top : 10px;
 height : 190px;
@@ -325,20 +203,6 @@ margin-bottom : 15px;
 padding : 15px 0 15px 0;
 text-align : justify;
 }
-#footer {
-bottom : 0;
-clear : both;
-text-align : left;
-border-top : 2px solid #e5e5e5;
-padding : 3px 0 0 0;
-margin-top : 5px;
-height : 50px;
-color : #888;
-background : inherit;
-}
-#footer .right {
-float : right;
-}
 #mod table {
 	width: 100%;
 }
@@ -351,24 +215,13 @@ float : right;
 	padding: 15px;
 	box-shadow: 0px 0px 15px #000000; 
 }
-#search_options h2 {
-	font : bold 2em "Tahoma", verdana, Arial;
+#search_options th {
+	font : bold 1.3em "Tahoma", verdana, Arial;
 	margin-bottom: 10px;
+	text-align: left
 }
 #search_options #days td {
 	width: 11%;
-}
-#search_options input[type="submit"] {
-	font-family: Tahoma, Verdana, Arial;
-	padding: 5px;
-	font-size: 1.25em; 
-	font-weight: bold; 
-	height: auto; 
-	width: auto; 
-	cursor: pointer; 
-	box-shadow: 0px 0px 5px #0361A8; 
-	text-align:right; 
-	margin-top: 10px; 
 }
 
 #ap_style td { text-align:left; font-family: Tahoma, verdana, Arial; color: #064073; font-size: 1.25em; }

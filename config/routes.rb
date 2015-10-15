@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'user/profile'
+
+  get 'user/transaction'
+  
+  post '/user/pay' => 'user#pay'
+
   #root 'submissions#index'
   get 'welcome/index'
   root 'welcome#index'

@@ -1,0 +1,23 @@
+<div id="content">
+	<h1>Transaction</h1>
+	<%= form_tag(method: "post", id: "transaction_form", action: "pay") do %>
+		<div id="transaction">
+			<table>
+				<tr>
+					<th>Seller</th>
+					<td><%= @seller %></td>
+				</tr>
+				<tr>
+					<th>Address</th>
+					<td><%= @address %></td>
+				</tr>
+				<tr>
+					<th>Price</th>
+					<td>$<%= @price %></td>
+				</tr>
+			</table>
+			<input type="hidden" id="price" name="price" value=$<%= @price %>/>
+			<input type="submit" value="Confirm"/>
+		</div>
+	<% end %>
+</div>
