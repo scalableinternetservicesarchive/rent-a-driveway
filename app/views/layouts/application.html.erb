@@ -5,18 +5,40 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   
-  <%= stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css' %>
-  <%= stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css' %>
+<!--  <%= stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css' %>-->
+<!--  <%= stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css' %> -->
   <%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js' %>
 
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="container">
-  <nav class="navbar navbar-default">
-    <a class="navbar-brand" href="/">Rent-A-Driveway</a>
-  </nav>
-    <%= yield %>
+<div id="content">
+
+  <div id="header">
+    <div class="topong">
+      <div class="pad"> <%= image_tag("account.gif", alt:"Account") %>
+        <h4><a href="../welcome/login">MY ACCOUNT</a></h4>
+        <br />
+        <span class="txt">View your account</span> </div>
+    </div>
+    <h1><span class="green bigl">R</span>ent-A-<span class="green bigl">D</span>riveway</h1>
+    <span class="slogan">Rent parking space near you!</span> </div>
+  <div id="menu">
+    <div class="pad">
+      <div class="submit">
+        <ul>
+          <li><a href="../welcome/index"><span>HOME</span></a></li>
+          <li><a href="../welcome/aboutus"><span>ABOUT US</span></a></li>
+        </ul>
+      </div>
+    </div>
   </div>
+    <%= yield %>
+  <div id="footer">
+    <p class="right">Copyright &copy; 2015 Chris, Minh Quan, Yuuma, John</p>
+    <p><a href="../welcome/index">Home</a> &middot; <a href="../welcome/aboutus">About Us</a><br />
+    </p>
+  </div>
+</div>
 </body>
 </html>
