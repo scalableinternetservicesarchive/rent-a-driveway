@@ -22,27 +22,37 @@
     For more info look for js/search_location.js
 -->
 <form method="post" id="search_location_form" action="" >
-    <div class="row">
-        <label for="location">Location:</label>
-        <input class="form-control" type="text" id="location_input" name="location" value="90024"></input>
-        <input type="hidden" id="longitude" name="longitude"></input>
-        <input type="hidden" id="latitude" name="latitude"></input>
-    </div>
-
-    <div class="row">
-        <div class="col-md-3">
-            <label for="start_time">Start time:</label>
-            <input class="form-control" type="text" id="start_time" name="start_time"></input>
-        </div>
-        <div class="col-md-3">
-            <label for="end_time">End time:</label>
-            <input class="form-control" type="text" id="end_time" name="end_time"></input>
-        </div>
-    </div>
-    <br/>
-
-    <div class="row">
-        <button type="submit" class="btn btn-primary btn-large">Search</button>
+	<div id="search_options">
+		<h2 class="green">Search</h2>
+		<table>
+			<tr>
+				<th>
+					<label for="location">Location:</label>
+				</th>
+				<td>
+					<input class="form-control" type="text" id="location_input" name="location" value="90024"></input>
+					<input type="hidden" id="longitude" name="longitude"></input>
+					<input type="hidden" id="latitude" name="latitude"></input>
+				<td>
+			</tr>
+			<tr>
+				<th>
+					<label for="start_time">Start time:</label>
+				</th>
+				<td>
+					<input class="form-control" type="text" id="start_time" name="start_time"></input>
+				<td>
+			</tr>
+			<tr>
+				<th>
+					<label for="end_time">End time:</label>
+				</th>
+				<td>
+					<input class="form-control" type="text" id="end_time" name="end_time"></input>
+				<td>
+			</tr>
+		</table>
+		<input type="submit" value="Search">
     </div>
 </form>
 

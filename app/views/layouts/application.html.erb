@@ -5,56 +5,40 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   
-  <%= stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css' %>
-  <%= stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css' %>
+<!--  <%= stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css' %>-->
+<!--  <%= stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css' %> -->
   <%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js' %>
 
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <nav class="navbar navbar-inverse">
-    <div class="container">
-      <div class="navbar-header">
-        <%= link_to 'Home', root_path, class: 'navbar-brand' %>
-      </div>
-      <div id="navbar">
-        <ul class="nav navbar-nav">
-          <% if current_user.try(:is_buyer) %>
-            <li><%= link_to "Buy", root_path %></li>
-          <% end %>
-          <% if current_user.try(:is_seller) %>
-            <li><%= link_to "Sell", root_path %></li>
-          <% end %>
-        </ul>
+<div id="content">
 
-        <ul class="nav navbar-nav pull-right">
-          <% if user_signed_in? %>
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <%= current_user.first_name + " " + current_user.last_name %>
-                <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu" role="menu">
-                <% if current_user.is_seller? %>
-                  <li>Sell</li>
-                <% else %>
-                  <li>No Sell</li>
-                <% end %>
-                <% if current_user.is_buyer? %>
-                  <li>Buy</li>
-                <% else %>
-                  <li>No buy</li>
-                <% end %>
-                <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
-              </ul>
-            </li>
-          <% else %>
-            <li><%= link_to 'Sign Up', new_user_registration_path %></li>
-            <li><%= link_to 'Log In', new_user_session_path %></li>
-          <% end %>
-        </ul>
+  <div id="header">
+    <div class="topong">
+      <div class="pad"> <%= image_tag("account.gif", alt:"Account") %>
+        <h4><a href="../welcome/login">MY ACCOUNT</a></h4>
+        <br />
+        <span class="txt">View your account</span> </div>
     </div>
-  </nav>
-  <%= yield %>
+    <h1><span class="green bigl">R</span>ent-A-<span class="green bigl">D</span>riveway</h1>
+    <span class="slogan">Rent parking space near you!</span> </div>
+  <div id="menu">
+    <div class="pad">
+      <div class="submit">
+        <ul>
+          <li><a href="../welcome/index"><span>HOME</span></a></li>
+          <li><a href="../welcome/aboutus"><span>ABOUT US</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+    <%= yield %>
+  <div id="footer">
+    <p class="right">Copyright &copy; 2015 Chris, Minh Quan, Yuuma, John</p>
+    <p><a href="../welcome/index">Home</a> &middot; <a href="../welcome/aboutus">About Us</a><br />
+    </p>
+  </div>
+</div>
 </body>
 </html>
