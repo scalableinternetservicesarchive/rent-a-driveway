@@ -14,14 +14,6 @@
  *= require_self
  */
 
- .alert-alert {
- 	@extend .alert-warning;
- }
-
- .alert-notice {
- 	@extend .alert-info;
- }
-
 #header h1 {
 background : #fafafa;
 font-family : "Tahoma", Verdana, Arial, sans-serif;
