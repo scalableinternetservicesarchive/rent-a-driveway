@@ -1,5 +1,22 @@
 <h1>Create new listing</h1>
 
-<%= render 'form' %>
+<%= form_for :listing, url: listings_path do |f| %>
+  <p>
+    <%= f.label :start_time %><br>
+    <%= f.text_field :start_time %>
+  </p>
 
-<%= link_to 'All Listings', listings_path %>
+  <p>
+    <%= f.label :end_time %><br>
+    <%= f.text_field :end_time %>
+  </p>
+ 
+  <p>
+    <%= f.label :price %><br>
+    <%= f.text_field :price %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
