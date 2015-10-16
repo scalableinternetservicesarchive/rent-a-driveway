@@ -9,7 +9,8 @@ class UserController < ApplicationController
   def transaction
 	@seller = "Name"
 	@address = "address"
-	@price = "100.00"
+	price = 100;
+	@price = sprintf("%0.02f", price)
   end
   
   def pay
