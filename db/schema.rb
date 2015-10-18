@@ -14,15 +14,15 @@
 ActiveRecord::Schema.define(version: 20151014212703) do
 
   create_table "listings", force: :cascade do |t|
-    t.string   "owner",      limit: 255
+    t.integer  "owner_id",   limit: 4
     t.string   "address",    limit: 255
     t.datetime "start_time"
     t.datetime "end_time"
     t.float    "longitude",  limit: 24
     t.float    "latitude",   limit: 24
-    t.float    "price",      limit: 24
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.decimal  "price",                  precision: 8, scale: 2
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
   end
 
   create_table "users", force: :cascade do |t|

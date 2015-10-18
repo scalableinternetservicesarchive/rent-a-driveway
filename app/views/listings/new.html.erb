@@ -3,12 +3,12 @@
 <%= form_for :listing, url: listings_path do |f| %>
   <p>
     <%= f.label :start_time %><br>
-    <%= f.text_field :start_time %>
+    <%= f.datetime_select :start_time %>
   </p>
 
   <p>
     <%= f.label :end_time %><br>
-    <%= f.text_field :end_time %>
+    <%= f.datetime_select :end_time %>
   </p>
  
   <p>
