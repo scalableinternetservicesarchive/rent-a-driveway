@@ -4,12 +4,11 @@
     <th>End Time</th>
     <th>Price</th>
   </tr>
- 
-  <% @listing.each do |listing| %>
-    <tr>
-      <td><%= listing.start_time %></td>
-      <td><%= listing.end_time %></td>
-      <td><%= listing.price %></td>
-    </tr>
-  <% end %>
+  <tr>
+    <td><%= @listing.start_time %></td>
+    <td><%= @listing.end_time %></td>
+    <td><%= @listing.price %></td>
+  </tr>
 </table>
+
+<%= button_to "Buy", new_transaction_path(:listing_id => @listing.id, :seller_id => @listing.owner_id) %>

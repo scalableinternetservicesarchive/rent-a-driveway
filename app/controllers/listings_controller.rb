@@ -1,11 +1,12 @@
 class ListingsController < ApplicationController
 
   def index
-    @listing = current_user_listings(current_user)
+    # @listing = current_user_listings(current_user)
+    @listing = Listing.all
   end
 
   def show
-  	@listing = Listing.all
+    @listing = Listing.find(params[:id])
   end
 
   def new

@@ -35,13 +35,11 @@
                 <span><%= link_to('Sell', '/listings/new') %></span>
               </li>
             <% end %>
-            <!--
             <% if current_user.try(:is_buyer) %>
               <li>
-                <%= link_to('Buy', view_listing_path) %>
+                <%= link_to('Buy', '/listings') %>
               </li>
             <% end %>
-            -->
             <li>
               <span><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></span>
             </li>

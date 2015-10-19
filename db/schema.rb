@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151014212703) do
+ActiveRecord::Schema.define(version: 20151019001530) do
 
   create_table "listings", force: :cascade do |t|
     t.integer  "owner_id",   limit: 4
@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(version: 20151014212703) do
     t.decimal  "price",                  precision: 8, scale: 2
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer  "seller_id",  limit: 4
+    t.integer  "buyer_id",   limit: 4
+    t.integer  "listing_id", limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "users", force: :cascade do |t|

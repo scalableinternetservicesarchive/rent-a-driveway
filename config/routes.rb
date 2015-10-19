@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :listings
+  resources :transactions
 
   devise_for :users
 
@@ -18,6 +19,9 @@ Rails.application.routes.draw do
 
   get '/users/sign_up' => 'login#index'
 
+  get '/buy/listings/all' => 'listings#show_all', :via => :get
+
+  post 'transactions/new' => 'transactions#new'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
