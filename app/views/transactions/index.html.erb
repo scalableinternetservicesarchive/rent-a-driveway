@@ -1,0 +1,35 @@
+<h1>My Transactions</h1>
+<% if is_buyer(current_user) %>
+Bought
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Price</th>
+  </tr>
+  <% @buyer_transactions.each do |transaction| %>
+      <tr>
+        <td><%= transaction.first_name %> <%= transaction.last_name %></td>
+        <td><%= transaction.address %></td>
+        <td><%= transaction.price %></td>
+      </tr>
+  <% end %>
+</table>
+<% end %>
+<% if is_seller(current_user) %>
+Sold
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Price</th>
+  </tr>
+  <% @seller_transactions.each do |transaction| %>
+      <tr>
+        <td><%= transaction.first_name %> <%= transaction.last_name %></td>
+        <td><%= transaction.address %></td>
+        <td><%= transaction.price %></td>
+      </tr>
+  <% end %>
+</table>
+<% end %>

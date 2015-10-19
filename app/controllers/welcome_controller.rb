@@ -9,7 +9,7 @@ class WelcomeController < ApplicationController
 
     def search_listings
         print "--------------------------------------------------"
-        print params 
+        print params
         print "--------------------------------------------------"
         print params[:longitude]
         print params[:latitude]

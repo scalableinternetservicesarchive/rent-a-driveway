@@ -53,4 +53,5 @@ class ListingsController < ApplicationController
     def current_user_listings(user)
       Listing.where("listings.owner_id = ?", user.id).order('created_at asc')
     end
+
 end

@@ -4,6 +4,17 @@ var resultsMap = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 34.068921, lng: -118.445181}
 });
 
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        };
+
+        resultsMap.setCenter(pos);
+    })
+}
+
 $("#search_location_form").submit(function(){
     // get the long and lat from user's input of location
     geocodeAddress(geocoder, $("#location_input").val(), function(result){

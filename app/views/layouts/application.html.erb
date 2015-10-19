@@ -30,12 +30,12 @@
           <li><a href="../welcome/index"><span>HOME</span></a></li>
           <li><a href="../welcome/aboutus"><span>ABOUT US</span></a></li>
           <% if user_signed_in? %>
-            <% if current_user.try(:is_seller) %>
+            <% if is_seller(current_user) %>
               <li>
                 <span><%= link_to('Sell', '/listings/new') %></span>
               </li>
             <% end %>
-            <% if current_user.try(:is_buyer) %>
+            <% if is_buyer(current_user) %>
               <li>
                 <%= link_to('Buy', '/listings') %>
               </li>
