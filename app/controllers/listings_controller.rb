@@ -1,11 +1,11 @@
 class ListingsController < ApplicationController
 
   def index
-    @listing = Listing.all
+    @listing = current_user_listings(current_user)
   end
 
   def show
-  	@listing = Listing.find(params[:id])
+  	@listing = Listing.all
   end
 
   def new
@@ -19,6 +19,7 @@ class ListingsController < ApplicationController
   def create
  	  @listing = Listing.new(listing_params)
     @listing.owner_id = current_user.id
+    Geocoder.coordinates(params[:address])
     if @listing.save
       redirect_to :action => :index
     else
@@ -28,7 +29,6 @@ class ListingsController < ApplicationController
   
   def update
     @listing = Listing.find(params[:id])
-   
     if @listing.update(listing_params)
       redirect_to @listing
     else
@@ -46,7 +46,10 @@ class ListingsController < ApplicationController
   private
 
     def listing_params
-      params.require(:listing).permit(:start_time, :end_time, :price)
+      params.require(:listing).permit(:address, :start_time, :end_time, :price)
     end
 
+    def current_user_listings(user)
+      Listing.where("listings.owner_id = ?", user.id).order('created_at asc')
+    end
 end

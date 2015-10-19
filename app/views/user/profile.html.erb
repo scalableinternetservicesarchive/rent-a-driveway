@@ -5,17 +5,30 @@
 	  <h2 class="green"><%= @name %></h2>
 		<table>
 			<tr>
+				<td><h4>Name:</h4></td>
+				<td><%= current_user.first_name + " " + current_user.last_name %></td>
+			</tr>
+			<tr>
 				<td><h4>Email:</h4></td>
-				<td><%= @email %></td>
+				<td><%= current_user.email %></td>
 			</tr>
-			<tr>
-				<td><h4>Phone:</h4></td>
-				<td><%= @phone %></td>
-			</tr>
-			<tr>
-				<td><h4>Rating:</h4></td>
-				<td><%= @rating %> / 10.0</td>
-			</tr>
+		</table>
+		<table>
+		  <tr>
+		  	<th>Address</th>
+		    <th>Start Time</th>
+		    <th>End Time</th>
+		    <th>Price</th>
+		  </tr>
+		 
+		  <% @listings.each do |listing| %>
+		    <tr>
+		    	<td><%= listing.address %></td>
+		      <td><%= listing.start_time %></td>
+		      <td><%= listing.end_time %></td>
+		      <td><%= listing.price %></td>
+		    </tr>
+		  <% end %>
 		</table>
 	</div>
 </div>

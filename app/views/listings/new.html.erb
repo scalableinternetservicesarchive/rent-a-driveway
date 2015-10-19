@@ -2,6 +2,11 @@
 
 <%= form_for :listing, url: listings_path do |f| %>
   <p>
+    <%= f.label :address %><br>
+    <%= f.text_field :address %>
+  </p>
+  
+  <p>
     <%= f.label :start_time %><br>
     <%= f.datetime_select :start_time %>
   </p>

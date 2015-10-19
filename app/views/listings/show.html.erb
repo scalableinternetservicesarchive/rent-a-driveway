@@ -1,14 +1,15 @@
-<p>
-  <strong>Start Time:</strong>
-  <%= @listing.start_time %>
-</p>
-
-<p>
-  <strong>End Time:</strong>
-  <%= @listing.end_time %>
-</p>
+<table>
+  <tr>
+    <th>Start Time</th>
+    <th>End Time</th>
+    <th>Price</th>
+  </tr>
  
-<p>
-  <strong>Price:</strong>
-  <%= @listing.price %>
-</p>
+  <% @listing.each do |listing| %>
+    <tr>
+      <td><%= listing.start_time %></td>
+      <td><%= listing.end_time %></td>
+      <td><%= listing.price %></td>
+    </tr>
+  <% end %>
+</table>

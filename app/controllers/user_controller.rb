@@ -1,9 +1,6 @@
 class UserController < ApplicationController
   def profile
-	@name = "Name"
-	@email = "email@email.com"
-	@phone = "000-000-0000"
-	@rating = 5.8     #0.0 to 10.0
+    @listings = current_user_listings(current_user)
   end
 
   def transaction
@@ -17,6 +14,11 @@ class UserController < ApplicationController
 	#TODO: payment methods
 	rec = "rent.a.driveway@gmail.com"
 	venmo = "https://venmo.com/?txn=pay&audience=private&amount=#{params[:price]}&recipients=#{rec}"
-	redirect_to(venmo)
+	redirect_to(venmo)  
   end
+
+  private
+    def current_user_listings(user)
+      Listing.where("listings.owner_id = ?", user.id).order('created_at asc')
+    end
 end
