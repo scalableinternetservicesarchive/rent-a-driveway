@@ -40,6 +40,7 @@
 			<% if is_buyer(current_user) %>
 				<li><%= link_to('<span>BUY</span>'.html_safe, '/listings') %></li>
 			<% end %>
+			  <li><%= link_to('<span>TRANSACTIONS</span>'.html_safe, '/transactions') %></li>
 			  <li><%= link_to('<span>LOGOUT</span>'.html_safe, destroy_user_session_path, :method => :delete) %></li>
 		  <% else %>
 			  <li><%= link_to('<span>LOGIN</span>'.html_safe, new_user_session_path) %></li>

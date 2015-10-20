@@ -1,37 +1,45 @@
 <div id="content">
 	<h1>My Transactions</h1><br/>
 	<% if is_buyer(current_user) %>
-	Bought
-	<table>
-	  <tr>
-		<th>Name</th>
-		<th>Address</th>
-		<th>Price</th>
-	  </tr>
-	  <% @buyer_transactions.each do |transaction| %>
+	<br/>
+	<div id="listing">
+		<h3>Bought</h3>
+		<table>
 		  <tr>
-			<td><%= transaction.first_name %> <%= transaction.last_name %></td>
-			<td><%= transaction.address %></td>
-			<td><%= transaction.price %></td>
+			<th>Name</th>
+			<th>Address</th>
+			<th>Price</th>
 		  </tr>
-	  <% end %>
-	</table>
+		  <% @buyer_transactions.each do |transaction| %>
+			  <tr>
+				<td><%= transaction.first_name %> <%= transaction.last_name %></td>
+				<td><%= transaction.address %></td>
+				<td><%= transaction.price %></td>
+			  </tr>
+		  <% end %>
+		</table>
+	</div>
+	<br/>
 	<% end %>
 	<% if is_seller(current_user) %>
-	Sold
-	<table>
-	  <tr>
-		<th>Name</th>
-		<th>Address</th>
-		<th>Price</th>
-	  </tr>
-	  <% @seller_transactions.each do |transaction| %>
+	<br/>
+	<div id="listing">
+		<h3>Sold</h3>
+		<table>
 		  <tr>
-			<td><%= transaction.first_name %> <%= transaction.last_name %></td>
-			<td><%= transaction.address %></td>
-			<td><%= transaction.price %></td>
+			<th>Name</th>
+			<th>Address</th>
+			<th>Price</th>
 		  </tr>
-	  <% end %>
-	</table>
+		  <% @seller_transactions.each do |transaction| %>
+			  <tr>
+				<td><%= transaction.first_name %> <%= transaction.last_name %></td>
+				<td><%= transaction.address %></td>
+				<td><%= transaction.price %></td>
+			  </tr>
+		  <% end %>
+		</table>
+	</div>
+	<br/>
 	<% end %>
 </div>
