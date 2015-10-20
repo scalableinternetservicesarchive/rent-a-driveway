@@ -1,14 +1,10 @@
 Rails.application.routes.draw do
   resources :listings
   resources :transactions
+  resources :aboutus
+  resources :user
 
   devise_for :users
-
-  get 'user/profile'
-
-  get 'user/transaction'
-  
-  post '/user/pay' => 'user#pay'
 
   #root 'submissions#index'
   get 'welcome/index'
