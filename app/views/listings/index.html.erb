@@ -1,36 +1,38 @@
 <div id="content">
 	<h1>All Listings</h1><br/>
 	 
-	<%= link_to 'New listing', new_listing_path %><br/>
+	 <div id="listing">
+		<%= link_to 'New listing', new_listing_path %><br/><br/>
 
-	<table>
-	  <tr>
-		<th>Start Time</th>
-		<th>End Time</th>
-		<th>Price</th>
-		<% if is_seller(current_user) %>
-		  <th>Status</th>
-		<% end %>
-	  </tr>
-	 
-	  <% @listing.each do |listing| %>
-		<% if user_can_view(current_user, listing) %> 
+		<table>
 		  <tr>
-			<td><%= listing.start_time %></td>
-			<td><%= listing.end_time %></td>
-			<td><%= listing.price %></td>
-			<% if is_buyer(current_user) %>
-			  <td><%= listing.status %></td>
-			<% end %>
-			<td><%= link_to 'Details', listing_path(listing) %></td>
-			<% if owns_listing(current_user, listing) %>
-			  <td><%= link_to 'Edit', edit_listing_path(listing) %></td>
-			  <td><%= link_to 'Delete', listing_path(listing),
-				  method: :delete,
-				  data: { confirm: 'Are you sure?' } %></td>
+			<th>Start Time</th>
+			<th>End Time</th>
+			<th>Price</th>
+			<% if is_seller(current_user) %>
+			  <th>Status</th>
 			<% end %>
 		  </tr>
-		<% end %>
-	  <% end %>
-	</table>
+		 
+		  <% @listing.each do |listing| %>
+			<% if user_can_view(current_user, listing) %> 
+			  <tr>
+				<td><%= listing.start_time %></td>
+				<td><%= listing.end_time %></td>
+				<td><%= sprintf("$%.2f", listing.price) %></td>
+				<% if is_buyer(current_user) %>
+				  <td><%= listing.status %></td>
+				<% end %>
+				<td><%= link_to 'Details', listing_path(listing) %></td>
+				<% if owns_listing(current_user, listing) %>
+				  <td><%= link_to 'Edit', edit_listing_path(listing) %></td>
+				  <td><%= link_to 'Delete', listing_path(listing),
+					  method: :delete,
+					  data: { confirm: 'Are you sure?' } %></td>
+				<% end %>
+			  </tr>
+			<% end %>
+		  <% end %>
+		</table>
+	</div>
 </div>
