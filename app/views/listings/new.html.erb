@@ -1,27 +1,29 @@
-<h1>Create new listing</h1>
+<div id="content">
+	<h1>Create new listing</h1><br/>
 
-<%= form_for :listing, url: listings_path do |f| %>
-  <p>
-    <%= f.label :address %><br>
-    <%= f.text_field :address %>
-  </p>
-  
-  <p>
-    <%= f.label :start_time %><br>
-    <%= f.datetime_select :start_time %>
-  </p>
+	<%= form_for :listing, url: listings_path do |f| %>
+	  <p>
+		<%= f.label :address %><br>
+		<%= f.text_field :address %>
+	  </p><br/>
+	  
+	  <p>
+		<%= f.label :start_time %><br>
+		<%= f.datetime_select :start_time %>
+	  </p><br/>
 
-  <p>
-    <%= f.label :end_time %><br>
-    <%= f.datetime_select :end_time %>
-  </p>
- 
-  <p>
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
-  </p>
- 
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
+	  <p>
+		<%= f.label :end_time %><br>
+		<%= f.datetime_select :end_time %>
+	  </p><br/>
+	 
+	  <p>
+		<%= f.label :price %><br>
+		<%= f.text_field :price %>
+	  </p><br/>
+	 
+	  <p>
+		<%= f.submit %>
+	  </p><br/>
+	<% end %>
+</div>
