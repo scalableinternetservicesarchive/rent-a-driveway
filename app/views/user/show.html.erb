@@ -1,0 +1,42 @@
+<div id="content">
+  <h1>Profile</h1>
+  <br/>
+  <div id="profile">
+    <table>
+      <tr>
+        <td><h4>Name:</h4></td>
+        <td><%= @user.first_name + " " + @user.last_name %></td>
+      </tr>
+      <tr>
+        <td><h4>Email:</h4></td>
+        <td><%= @user.email %></td>
+      </tr>
+    </table>
+    <% if !@listings.blank? %>
+      <table>
+        <tr>
+          <th>Address</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th>Price</th>
+        </tr>
+        <% @listings.each do |listing| %>
+          <tr>
+            <td><%= listing.address %></td>
+            <td><%= listing.start_time.strftime("%B %e %Y %l:00") %></td>
+            <td><%= listing.end_time.strftime("%B %e %Y %l:00") %></td>
+            <td><%= listing.price %></td>
+            <td><%= link_to 'Show', listing_path(listing) %></td>
+            <% if current_user.id == @user.id %>
+              <td><%= link_to 'Edit', edit_listing_path(listing) %></td>
+              <td><%= link_to 'Destroy', listing_path(listing),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </table>
+    <% end %>
+  </div>
+</div>
