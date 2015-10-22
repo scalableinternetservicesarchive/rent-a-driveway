@@ -20,6 +20,10 @@ class ListingsController < ApplicationController
       @listing_analytics_location.save
     end
     @listing_analytics_locations = ListingAnalyticsLocation.where("listing_analytics_locations.listing_analytic_id = ?", @listing_analytics.id)
+    @hash = Gmaps4rails.build_markers(@listing) do |listing, marker|
+      marker.lat listing.latitude
+      marker.lng listing.longitude
+    end
   end
 
   def new
