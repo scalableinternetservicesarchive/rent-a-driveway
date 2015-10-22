@@ -7,7 +7,7 @@ class ListingsController < ApplicationController
 
   def show
     @listing = Listing.find(params[:id])
-    @listing_analytics = ListingAnalytic.where("listing_analytics.listing_id = ?", params[:id]).first
+    @listing_analytics = @listing.listing_analytics
     if current_user.try(:is_buyer)
       @listing_analytics.increment!(:view_count)
       @listing_analytics_location = ListingAnalyticsLocation.new
@@ -19,7 +19,7 @@ class ListingsController < ApplicationController
       @listing_analytics_location.listing_analytic_id = @listing_analytics.id
       @listing_analytics_location.save
     end
-    @listing_analytics_locations = ListingAnalyticsLocation.where("listing_analytics_locations.listing_analytic_id = ?", @listing_analytics.id)
+    @listing_analytics_locations = @listing_analytics.listing_analytics_locations
     @hash = Gmaps4rails.build_markers(@listing) do |listing, marker|
       marker.lat listing.latitude
       marker.lng listing.longitude
@@ -71,10 +71,4 @@ class ListingsController < ApplicationController
     def listing_params
       params.require(:listing).permit(:address, :start_time, :end_time, :price)
     end
-
-
-    def current_user_listings(user)
-      Listing.where("listings.owner_id = ?", user.id).order('created_at asc')
-    end
-
 end
