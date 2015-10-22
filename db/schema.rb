@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019025130) do
+ActiveRecord::Schema.define(version: 20151020222100) do
+
+  create_table "listing_analytics", force: :cascade do |t|
+    t.integer  "listing_id", limit: 4
+    t.integer  "view_count", limit: 4, default: 0
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
+
+  create_table "listing_analytics_locations", force: :cascade do |t|
+    t.integer  "listing_analytic_id", limit: 4
+    t.string   "ip",                  limit: 255
+    t.float    "longitude",           limit: 24
+    t.float    "latitude",            limit: 24
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
 
   create_table "listings", force: :cascade do |t|
     t.integer  "owner_id",   limit: 4

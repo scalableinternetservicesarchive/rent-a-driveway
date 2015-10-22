@@ -7,6 +7,19 @@ class ListingsController < ApplicationController
 
   def show
     @listing = Listing.find(params[:id])
+    @listing_analytics = ListingAnalytic.where("listing_analytics.listing_id = ?", params[:id]).first
+    if current_user.try(:is_buyer)
+      @listing_analytics.increment!(:view_count)
+      @listing_analytics_location = ListingAnalyticsLocation.new
+      if Rails.env.development?
+        @listing_analytics_location.ip = Array.new(4){rand(256)}.join('.')
+      else
+        @listing_analytics_location.ip = request.remote_ip
+      end
+      @listing_analytics_location.listing_analytic_id = @listing_analytics.id
+      @listing_analytics_location.save
+    end
+    @listing_analytics_locations = ListingAnalyticsLocation.where("listing_analytics_locations.listing_analytic_id = ?", @listing_analytics.id)
   end
 
   def new
@@ -20,8 +33,13 @@ class ListingsController < ApplicationController
   def create
  	  @listing = Listing.new(listing_params)
     @listing.owner_id = current_user.id
+
     Geocoder.coordinates(params[:address])
+
     if @listing.save
+      @listing_analytics = ListingAnalytic.new
+      @listing_analytics.listing_id = @listing.id
+      @listing_analytics.save
       redirect_to :action => :index
     else
       render 'new'
@@ -49,6 +67,7 @@ class ListingsController < ApplicationController
     def listing_params
       params.require(:listing).permit(:address, :start_time, :end_time, :price)
     end
+
 
     def current_user_listings(user)
       Listing.where("listings.owner_id = ?", user.id).order('created_at asc')

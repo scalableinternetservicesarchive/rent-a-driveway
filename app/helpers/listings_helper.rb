@@ -7,6 +7,10 @@ module ListingsHelper
     user.try(:is_buyer)
   end
 
+  def is_admin(user)
+    user.try(:is_admin)
+  end
+
   def owns_listing(user, listing)
     is_seller(user) && listing.owner_id == user.id
   end
@@ -17,6 +21,6 @@ module ListingsHelper
 
   def user_can_view(user, listing)
     user_can_buy(user, listing) ||
-    is_seller(user)
+    owns_listing(user, listing) || is_admin(user)
   end
 end

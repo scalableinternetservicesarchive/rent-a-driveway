@@ -1,6 +1,11 @@
 class UserController < ApplicationController
   def index
-    @listings = current_user_listings(current_user)
+    @users = User.all
+  end
+
+  def show
+    @user = User.find(params[:id])
+    @listings = current_user_listings(@user)
   end
   
   private

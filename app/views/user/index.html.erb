@@ -1,41 +1,31 @@
 <div id="content">
-  <h1>Profile</h1>
-  <br/>
-	<div id="profile">
+	<% if is_admin(current_user) %>
 		<table>
 			<tr>
-				<td><h4>Name:</h4></td>
-				<td><%= current_user.first_name + " " + current_user.last_name %></td>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Type</th>
 			</tr>
-			<tr>
-				<td><h4>Email:</h4></td>
-				<td><%= current_user.email %></td>
-			</tr>
+			<% @users.each do |user| %>
+				<tr>
+					<td><%= user.first_name %> <%= user.last_name %></td>
+					<td><%= user.email %></td>
+					<% if is_seller(user) && is_buyer(user) %>
+						<td>Buyer/Seller</td>
+					<% else %>
+						<% if is_seller(user) %>
+							<td>Seller</td>
+						<% end %>
+						<% if is_buyer(user) %>
+							<td>Buyer</td>
+						<% end %>
+					<% end %>
+					<% if is_admin(user) %>
+						<td>Admin</td>
+					<% end %>
+					<td><%= link_to "Details", user_path(user) %></td>
+				</tr>
+			<% end %>
 		</table>
-	</div>
-	<br/>
-	<div id="listing">
-		<table>
-		  <tr>
-			<th>Address</th>
-			<th>Start Time</th>
-			<th>End Time</th>
-			<th>Price</th>
-		  </tr>
-		 
-		  <% @listings.each do |listing| %>
-			<tr>
-			  <td><%= listing.address %></td>
-			  <td><%= listing.start_time %></td>
-			  <td><%= listing.end_time %></td>
-			  <td><%= sprintf("$%.2f", listing.price) %></td>
-			  <td><%= link_to 'Show', listing_path(listing) %></td>
-			  <td><%= link_to 'Edit', edit_listing_path(listing) %></td>
-			<td><%= link_to 'Destroy', listing_path(listing),
-			  method: :delete,
-			  data: { confirm: 'Are you sure?' } %></td>
-			</tr>
-		  <% end %>
-	  </div>
-	</table>
+	<% end %>
 </div>

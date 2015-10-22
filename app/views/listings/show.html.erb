@@ -1,18 +1,38 @@
-<div id="content">
-	<div id="listing">
-		<table>
-		  <tr>
-			<th>Start Time</th>
-			<th>End Time</th>
-			<th>Price</th>
-		  </tr>
-		  <tr>
-			<td><%= @listing.start_time %></td>
-			<td><%= @listing.end_time %></td>
-			<td><%= sprintf("$%.2f", @listing.price) %></td>
-		  </tr>
-		</table>
-
-		<%= button_to "Buy", new_transaction_path(:listing_id => @listing.id, :seller_id => @listing.owner_id) %>
-	</div>
+<table>
+  <tr>
+    <th>Start Time</th>
+    <th>End Time</th>
+    <th>Price</th>
+  </tr>
+  <tr>
+    <td><%= @listing.start_time.strftime("%B %e %Y %l:00") %></td>
+    <td><%= @listing.end_time.strftime("%B %e %Y %l:00") %></td>
+    <td><%= @listing.price %></td>
+  </tr>
+</table>
+<div>
+  View Count: <%= @listing_analytics.view_count %>
 </div>
+<% if user_can_buy(current_user, @listing) %>
+  <%= button_to "Buy", new_transaction_path(:listing_id => @listing.id, :seller_id => @listing.owner_id) %>
+<% end %>
+
+<% if is_admin(current_user) && !@listing_analytics_locations.blank? %>
+  <table>
+    <tr>
+      <th>IP</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+    </tr>
+    <% @listing_analytics_locations.each do |locations| %>
+      <tr>
+        <td>TODO@yuuma</td>
+        <td><%= locations.latitude %></td>
+        <td><%= locations.longitude %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+
+
