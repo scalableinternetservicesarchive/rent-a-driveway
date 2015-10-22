@@ -17,13 +17,16 @@
   <div id="header">
     <div class="topong">
       <div class="pad"> <%= image_tag("account.gif", alt:"Account") %>
-		<% if user_signed_in? %>
-          <h4><%= link_to('MY ACCOUNT', user_path(current_user)) %></h4>
-		<% else %>
-		  <h4><%= link_to('LOGIN', new_user_session_path) %></h4>
-		<% end %>
+    		<% if user_signed_in? %>
+              <h4><%= link_to('MY ACCOUNT', user_path(current_user)) %></h4>
+    		<% else %>
+    		  <h4><%= link_to('LOGIN', new_user_session_path) %></h4>
+    		<% end %>
         <br />
-        <span class="txt">View your account</span> </div>
+        <% if user_signed_in? %>
+          <span class="txt"><%= current_user.first_name %> <%= current_user.last_name %></span> 
+        <% end %>
+      </div>
     </div>
     <h1><span class="green bigl">R</span>ent-A-<span class="green bigl">D</span>riveway</h1>
     <span class="slogan">Rent parking space near you!</span> </div>

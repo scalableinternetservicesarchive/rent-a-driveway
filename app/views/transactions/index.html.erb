@@ -12,9 +12,9 @@
 		  </tr>
 		  <% @buyer_transactions.each do |transaction| %>
 			  <tr>
-				<td><%= transaction.first_name %> <%= transaction.last_name %></td>
-				<td><%= transaction.address %></td>
-				<td><%= transaction.price %></td>
+				<td><%= transaction.seller.first_name %> <%= transaction.seller.last_name %></td>
+				<td><%= transaction.listing.address %></td>
+				<td><%= transaction.listing.price %></td>
 			  </tr>
 		  <% end %>
 		</table>
@@ -33,9 +33,9 @@
 		  </tr>
 		  <% @seller_transactions.each do |transaction| %>
 			  <tr>
-				<td><%= transaction.first_name %> <%= transaction.last_name %></td>
-				<td><%= transaction.address %></td>
-				<td><%= transaction.price %></td>
+				<td><%= transaction.seller.first_name %> <%= transaction.seller.last_name %></td>
+				<td><%= transaction.listing.address %></td>
+				<td><%= transaction.listing.price %></td>
 			  </tr>
 		  <% end %>
 		</table>

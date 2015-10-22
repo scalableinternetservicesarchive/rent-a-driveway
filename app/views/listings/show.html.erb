@@ -3,11 +3,13 @@
 
 <table>
   <tr>
+    <th>Address</th>
     <th>Start Time</th>
     <th>End Time</th>
     <th>Price</th>
   </tr>
   <tr>
+    <td><%= @listing.address %></td>
     <td><%= @listing.start_time.strftime("%B %e %Y %l:00") %></td>
     <td><%= @listing.end_time.strftime("%B %e %Y %l:00") %></td>
     <td><%= @listing.price %></td>

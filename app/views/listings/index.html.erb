@@ -5,6 +5,7 @@
 
 		<table>
 		  <tr>
+		  	<th>Address</th>
 				<th>Start Time</th>
 				<th>End Time</th>
 				<th>Price</th>
@@ -16,6 +17,7 @@
 		  <% @listing.each do |listing| %>
 				<% if user_can_view(current_user, listing) %> 
 				  <tr>
+				  	<td><%= listing.address %></td>
 						<td><%= listing.start_time.strftime("%B %e %Y %l:00") %></td>
 						<td><%= listing.end_time.strftime("%B %e %Y %l:00") %></td>
 						<td><%= sprintf("$%.2f", listing.price) %></td>
