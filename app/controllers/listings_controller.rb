@@ -28,7 +28,7 @@ class ListingsController < ApplicationController
     @nearby_listings = @listing.nearbys(2)
 
     @nearby_listings.each do |nearby_listing|
-      nearby_listing[:distance] = @listing.distance_from(nearby_listing)
+      nearby_listing.distance = @listing.distance_from(nearby_listing)
     end
   end
 

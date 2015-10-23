@@ -11,19 +11,7 @@
 					<tr>
 						<td><%= user.first_name %> <%= user.last_name %></td>
 						<td><%= user.email %></td>
-						<% if is_seller(user) && is_buyer(user) %>
-							<td>Buyer/Seller</td>
-						<% else %>
-							<% if is_seller(user) %>
-								<td>Seller</td>
-							<% end %>
-							<% if is_buyer(user) %>
-								<td>Buyer</td>
-							<% end %>
-						<% end %>
-						<% if is_admin(user) %>
-							<td>Admin</td>
-						<% end %>
+						<td><%= user.type %></td>
 						<td><%= link_to "Details", user_path(user) %></td>
 					</tr>
 				<% end %>

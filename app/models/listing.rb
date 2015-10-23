@@ -11,4 +11,12 @@ class Listing < ActiveRecord::Base
   geocoded_by :address
   after_validation :geocode
   enum status: [:OPEN, :CLOSED]
+
+  def distance= (distance)
+    @distance = distance
+  end
+
+  def distance
+    @distance
+  end
 end

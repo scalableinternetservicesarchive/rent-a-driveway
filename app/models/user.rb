@@ -7,4 +7,12 @@ class User < ActiveRecord::Base
   has_many :buyer_transactions, :class_name => 'Transaction', :foreign_key => 'buyer_id'
   has_many :seller_transactions, :class_name => 'Transaction', :foreign_key => 'seller_id'
   accepts_nested_attributes_for :listings
+
+  def type= (type)
+    @type = type
+  end
+
+  def type
+    @type
+  end
 end
