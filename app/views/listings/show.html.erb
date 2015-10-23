@@ -3,64 +3,66 @@
 
 <br/>
 <div class="row listing">
-	<div class="col-md-9">
-		<div id="listing">
-			<table>
-			  <tr>
-					<th>Address</th>
-					<th>Start Time</th>
-					<th>End Time</th>
-					<th>Price</th>
-			  </tr>
-			  <tr>
-					<td><%= @listing.address %></td>
-					<td><%= @listing.start_time.strftime("%B %e %Y %l:00") %></td>
-					<td><%= @listing.end_time.strftime("%B %e %Y %l:00") %></td>
-					<td><%= sprintf("$%.2f", @listing.price) %></td>
-					<% if user_can_buy(current_user, @listing) %>
-					  <td align="center"><%= button_to "Buy", new_transaction_path(:listing_id => @listing.id, :seller_id => @listing.owner_id) %></td>
-					<% end %>
-			  </tr>
-			</table>
-			<br/>
-			View Count: <%= @listing_analytics.view_count %>
-			<br/>
+	<div class="col-md-11">
+		<div class="col-md-offset-1">
+			<div id="listing">
+				<table>
+				  <tr>
+						<th>Address</th>
+						<th>Start Time</th>
+						<th>End Time</th>
+						<th>Price</th>
+				  </tr>
+				  <tr>
+						<td><%= @listing.address %></td>
+						<td><%= @listing.start_time.strftime("%B %e %Y %l:00") %></td>
+						<td><%= @listing.end_time.strftime("%B %e %Y %l:00") %></td>
+						<td><%= sprintf("$%.2f", @listing.price) %></td>
+						<% if user_can_buy(current_user, @listing) %>
+						  <td align="center"><%= button_to "Buy", new_transaction_path(:listing_id => @listing.id, :seller_id => @listing.owner_id) %></td>
+						<% end %>
+				  </tr>
+				</table>
+				<br/>
+				View Count: <%= @listing_analytics.view_count %>
+				<br/>
 
-			<% if is_admin(current_user) && !@listing_analytics_locations.blank? %>
-			  <table>
-					<tr>
-					  <th>IP</th>
-					  <th>Latitude</th>
-					  <th>Longitude</th>
-					</tr>
-					<% @listing_analytics_locations.each do |locations| %>
-					  <tr>
-							<td>TODO@yuuma</td>
-							<td><%= locations.latitude %></td>
-							<td><%= locations.longitude %></td>
-					  </tr>
-					<% end %>
-			  </table>
-			<% end %>
-			<div id="map" style="height: 500px;"></div>
+				<% if is_admin(current_user) && !@listing_analytics_locations.blank? %>
+				  <table>
+						<tr>
+						  <th>IP</th>
+						  <th>Latitude</th>
+						  <th>Longitude</th>
+						</tr>
+						<% @listing_analytics_locations.each do |locations| %>
+						  <tr>
+								<td>TODO@yuuma</td>
+								<td><%= locations.latitude %></td>
+								<td><%= locations.longitude %></td>
+						  </tr>
+						<% end %>
+				  </table>
+				<% end %>
+				<div id="map" style="height: 500px;"></div>
+			</div>
 		</div>
-	</div>
-	<div class="col-md-3">
-		<% if !@nearby_listings.blank? %>
-			<h5>Nearby Listings</h5>
-			<% @nearby_listings.each do |nearby_listing| %>
-				<div class="nearby_listing">
-					<%= nearby_listing.address %>
+		<div class="col-md-3">
+			<% if !@nearby_listings.blank? %>
+				<h5>Nearby Listings</h5>
+				<% @nearby_listings.each do |nearby_listing| %>
+					<div class="nearby_listing">
+						<%= nearby_listing.address %>
+						<br />
+						$<%= nearby_listing.price %>
+						<br />
+						<%= nearby_listing.distance.round(2) %> miles away
+						<br />
+						<%= link_to "Details", listing_path(nearby_listing) %>
+					</div>
 					<br />
-					$<%= nearby_listing.price %>
-					<br />
-					<%= nearby_listing.distance.round(2) %> miles away
-					<br />
-					<%= link_to "Details", listing_path(nearby_listing) %>
-				</div>
-				<br />
+				<% end %>
 			<% end %>
-		<% end %>
+		</div>
 	</div>
 </div>
 
