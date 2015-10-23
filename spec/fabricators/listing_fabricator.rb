@@ -3,8 +3,8 @@ def get_address()
   lat = 34.0722
   lng = -118.4451
 
-  lat += rand(-0.0075...0.0075)
-  lng += rand(-0.0075...0.0075)
+  lat += rand(-0.050...0.050)
+  lng += rand(-0.050...0.050)
 
   while true do
     query = "#{lat},#{lng}"
@@ -12,8 +12,8 @@ def get_address()
     if result.present?
       break
     else
-      lat += rand(-0.0005...0.0005)
-      lng += rand(-0.0005...0.0005)
+      lat += rand(-0.001...0.001)
+      lng += rand(-0.001...0.001)
     end
   end
 

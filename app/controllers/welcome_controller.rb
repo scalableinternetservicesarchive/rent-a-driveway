@@ -1,22 +1,11 @@
 class WelcomeController < ApplicationController
-    def new
-
-    end
-
     def index
-        print params[:parameters]
-    end
-
-    def search_listings
-        print "--------------------------------------------------"
-        print params
-        print "--------------------------------------------------"
-        print params[:longitude]
-        print params[:latitude]
-        newArray = []
-        for i in 0..10
-            newArray[i] = Hash("longitude" => params[:longitude].to_f + (Random.rand(0..100000) - 50000) * 0.0000001, "latitude" => params[:latitude].to_f + (Random.rand(0..100000) - 50000) * 0.0000001)
+        @cur_lat = Rails.env.production? ? request.location.latitude : 34.068921
+        @cur_lng = Rails.env.production? ? request.location.longitude : -118.445181
+        @nearby_listings = Listing.near([@cur_lat, @cur_lng], 2)
+        @markers = Gmaps4rails.build_markers(@nearby_listings) do |listing, marker|
+            marker.lat listing.latitude
+            marker.lng listing.longitude
         end
-        render json: newArray 
     end
 end
