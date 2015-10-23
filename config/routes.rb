@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get '/buy/listings/all' => 'listings#show_all', :via => :get
 
   post 'transactions/new' => 'transactions#new'
+
+  get '*path', :to => 'application#page_not_found'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
