@@ -49,9 +49,6 @@
 <div id="map" style="height: 500px;"></div>
 
 <script>
-    $("#start_time").datepicker();
-    $("#end_time").datepicker();
-
 		handler = Gmaps.build('Google');
 		handler.buildMap({ provider: { Zoom: 15 }, internal: {id: 'map'}}, function(){
 		  markers = handler.addMarkers(<%= raw @markers.to_json %>);

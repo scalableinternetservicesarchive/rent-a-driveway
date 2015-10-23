@@ -6,6 +6,7 @@ class WelcomeController < ApplicationController
         @markers = Gmaps4rails.build_markers(@nearby_listings) do |listing, marker|
             marker.lat listing.latitude
             marker.lng listing.longitude
+            marker.infowindow  "Address: #{listing.address}<br />Price: $#{listing.price}<br /><a href=#{listing_path(listing)}>Details</a>"
         end
     end
 end
