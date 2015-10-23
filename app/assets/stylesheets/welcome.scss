@@ -224,6 +224,11 @@ text-align : justify;
 	width: 11%;
 }
 
+#content #aboutus {
+	text-align: justify;
+	font : 1.3em "Tahoma", verdana, Arial;
+}
+
 #ap_style td { text-align:left; font-family: Tahoma, verdana, Arial; color: #064073; font-size: 1.25em; }
 #ap_style input { border: 1px solid #CCCCCC; border-radius: 5px; color: #666666; display: inline-block; font-size: 1.25em;  padding: 5px; }
 #ap_style input[type="text"], input[type="password"] { width: 100%; }
