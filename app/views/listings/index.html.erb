@@ -1,7 +1,8 @@
 <div id="content">
 	<h1>All Listings</h1>
-	 
+	 <% if current_user.is_seller %>
 		<h3><%= link_to 'New listing', new_listing_path %></h3><br/>
+	<% end %>
 		<div id="listing">
 			<table>
 			  <tr>

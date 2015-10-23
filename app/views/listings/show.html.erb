@@ -17,14 +17,14 @@
 					<td><%= @listing.start_time.strftime("%B %e %Y %l:00") %></td>
 					<td><%= @listing.end_time.strftime("%B %e %Y %l:00") %></td>
 					<td><%= sprintf("$%.2f", @listing.price) %></td>
+					<% if user_can_buy(current_user, @listing) %>
+					  <td align="center"><%= button_to "Buy", new_transaction_path(:listing_id => @listing.id, :seller_id => @listing.owner_id) %></td>
+					<% end %>
 			  </tr>
 			</table>
 			<br/>
 			View Count: <%= @listing_analytics.view_count %>
 			<br/>
-			<% if user_can_buy(current_user, @listing) %>
-			  <%= button_to "Buy", new_transaction_path(:listing_id => @listing.id, :seller_id => @listing.owner_id) %>
-			<% end %>
 
 			<% if is_admin(current_user) && !@listing_analytics_locations.blank? %>
 			  <table>

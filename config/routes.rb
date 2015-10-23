@@ -13,8 +13,6 @@ Rails.application.routes.draw do
   post '/' => 'welcome#search_location'
   get '/get_listings' => 'welcome#search_listings', as: :/
 
-  get '/users/sign_up' => 'login#index'
-
   get '/buy/listings/all' => 'listings#show_all', :via => :get
 
   post 'transactions/new' => 'transactions#new'

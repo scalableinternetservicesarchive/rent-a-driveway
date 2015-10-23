@@ -1,4 +1,6 @@
+
 <div id="content">
+<% if current_user.is_seller %>
 	<h1>Create New Listing</h1><br/>
 
 	<%= form_for :listing, url: listings_path do |f| %>
@@ -26,4 +28,7 @@
 		<%= f.submit %>
 	  </p><br/>
 	<% end %>
+<% else %>
+	<h1>You are not a seller</h1>
+<% end %>
 </div>
