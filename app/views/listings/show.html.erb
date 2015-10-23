@@ -2,56 +2,73 @@
 <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js' type='text/javascript'></script>
 
 <br/>
-<div id="listing">
-	<table>
-	  <tr>
-		<th>Address</th>
-		<th>Start Time</th>
-		<th>End Time</th>
-		<th>Price</th>
-	  </tr>
-	  <tr>
-		<td><%= @listing.address %></td>
-		<td><%= @listing.start_time.strftime("%B %e %Y %l:00") %></td>
-		<td><%= @listing.end_time.strftime("%B %e %Y %l:00") %></td>
-		<td><%= sprintf("$%.2f", @listing.price) %></td>
-	  </tr>
-	</table>
-	<br/>
-	<div>
-	  View Count: <%= @listing_analytics.view_count %>
+<div class="row">
+	<div class="col-md-9">
+		<div id="listing">
+			<table>
+			  <tr>
+					<th>Address</th>
+					<th>Start Time</th>
+					<th>End Time</th>
+					<th>Price</th>
+			  </tr>
+			  <tr>
+					<td><%= @listing.address %></td>
+					<td><%= @listing.start_time.strftime("%B %e %Y %l:00") %></td>
+					<td><%= @listing.end_time.strftime("%B %e %Y %l:00") %></td>
+					<td><%= sprintf("$%.2f", @listing.price) %></td>
+			  </tr>
+			</table>
+			<br/>
+			View Count: <%= @listing_analytics.view_count %>
+			<br/>
+			<% if user_can_buy(current_user, @listing) %>
+			  <%= button_to "Buy", new_transaction_path(:listing_id => @listing.id, :seller_id => @listing.owner_id) %>
+			<% end %>
+
+			<% if is_admin(current_user) && !@listing_analytics_locations.blank? %>
+			  <table>
+					<tr>
+					  <th>IP</th>
+					  <th>Latitude</th>
+					  <th>Longitude</th>
+					</tr>
+					<% @listing_analytics_locations.each do |locations| %>
+					  <tr>
+							<td>TODO@yuuma</td>
+							<td><%= locations.latitude %></td>
+							<td><%= locations.longitude %></td>
+					  </tr>
+					<% end %>
+			  </table>
+			<% end %>
+			<div id="map" style="height: 500px;"></div>
+		</div>
 	</div>
-	<br/>
-	<% if user_can_buy(current_user, @listing) %>
-	  <%= button_to "Buy", new_transaction_path(:listing_id => @listing.id, :seller_id => @listing.owner_id) %>
-	<% end %>
-
-	<% if is_admin(current_user) && !@listing_analytics_locations.blank? %>
-	  <table>
-		<tr>
-		  <th>IP</th>
-		  <th>Latitude</th>
-		  <th>Longitude</th>
-		</tr>
-		<% @listing_analytics_locations.each do |locations| %>
-		  <tr>
-			<td>TODO@yuuma</td>
-			<td><%= locations.latitude %></td>
-			<td><%= locations.longitude %></td>
-		  </tr>
+	<div class="col-md-3">
+		<% if !@nearby_listings.blank? %>
+			<h5>Nearby Listings</h5>
+			<% @nearby_listings.each do |nearby_listing| %>
+				<div class="nearby_listing">
+					<%= nearby_listing.address %>
+					<br />
+					$<%= nearby_listing.price %>
+					<br />
+					<%= nearby_listing.distance.round(2) %> miles away
+					<br />
+					<%= link_to "Details", listing_path(nearby_listing) %>
+				</div>
+				<br />
+			<% end %>
 		<% end %>
-	  </table>
-	<% end %>
+	</div>
+</div>
 
-	<div id="map" style="height: 500px;"></div>
-
-	<script type="text/javascript">
+<script type="text/javascript">
 	handler = Gmaps.build('Google');
 	handler.buildMap({ provider: { Zoom: 15 }, internal: {id: 'map'}}, function(){
 	  markers = handler.addMarkers(<%= raw @hash.to_json %>);
 	  handler.bounds.extendWith(markers);
 	  handler.map.centerOn(markers[0]);
 	});
-	</script>
-
-</div>
+</script>

@@ -24,6 +24,12 @@ class ListingsController < ApplicationController
       marker.lat listing.latitude
       marker.lng listing.longitude
     end
+
+    @nearby_listings = @listing.nearbys(2)
+
+    @nearby_listings.each do |nearby_listing|
+      nearby_listing[:distance] = @listing.distance_from(nearby_listing)
+    end
   end
 
   def new
