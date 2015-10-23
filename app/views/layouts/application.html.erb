@@ -22,7 +22,6 @@
     		<% else %>
     		  <h4><%= link_to('LOGIN', new_user_session_path) %></h4>
     		<% end %>
-        <br />
         <% if user_signed_in? %>
           <span class="txt"><%= current_user.first_name %> <%= current_user.last_name %></span> 
         <% end %>
