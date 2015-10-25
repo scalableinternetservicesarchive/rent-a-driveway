@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :listings
+  resources :listings do
+    collection do
+      get :search
+    end
+  end
   resources :transactions
   resources :aboutus
   resources :user
@@ -18,6 +22,9 @@ Rails.application.routes.draw do
   post 'transactions/new' => 'transactions#new'
 
   get '*path', :to => 'application#page_not_found'
+
+  # match ':controller(/:action)', :via => [:get, :post]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

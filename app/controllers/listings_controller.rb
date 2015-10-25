@@ -72,6 +72,10 @@ class ListingsController < ApplicationController
     redirect_to listings_path
   end
 
+  def search
+    redirect_to listings_path 
+  end
+
   private
 
     def listing_params
