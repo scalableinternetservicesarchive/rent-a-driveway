@@ -75,4 +75,13 @@
 	$("#start_time").timepicker();
 	$("#end_date").datepicker({"dateFormat": "yy-mm-dd"});
 	$("#end_time").timepicker();
+
+	// check user fills out search criteria before submitting form
+	$("#search_location_form").submit(function(){
+		if ($("#start_date").val().length == 0 || $("#end_date").val().length == 0 || $("#start_time").val().length == 0 || $("#end_time").val().length == 0 || $("#location").val().length == 0){
+			alert("You haven't filled out the search criteria");
+			return false;
+		} else
+			return true;
+	});
 </script>
