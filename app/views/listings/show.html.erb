@@ -73,4 +73,9 @@
 	  handler.bounds.extendWith(markers);
 	  handler.map.centerOn(markers[0]);
 	});
+	$.ajax({
+		type: "POST",
+		url: "/log/listing",
+		data: { listing_id: <%= @listing.id %> }
+	});
 </script>

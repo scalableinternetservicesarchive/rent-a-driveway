@@ -21,6 +21,9 @@ Rails.application.routes.draw do
 
   post 'transactions/new' => 'transactions#new'
 
+  post 'log/listing' => 'listings#log'
+
+
   get '*path', :to => 'application#page_not_found'
 
   # match ':controller(/:action)', :via => [:get, :post]
