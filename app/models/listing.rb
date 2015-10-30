@@ -12,6 +12,8 @@ class Listing < ActiveRecord::Base
   after_validation :geocode
   enum status: [:OPEN, :CLOSED]
 
+  has_attached_file :listing_image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "listing_images/default.png"
+  validates_attachment_content_type :listing_image, :content_type => %w(image/jpeg image/jpg image/png)
   def distance= (distance)
     @distance = distance
   end
