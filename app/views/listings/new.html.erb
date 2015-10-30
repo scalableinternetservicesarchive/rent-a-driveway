@@ -1,34 +1,36 @@
 
-<div id="content">
-<% if current_user.is_seller %>
-	<h1>Create New Listing</h1><br/>
+<div id="content" class="row">
+	<div class="col-md-offset-4 col-md-6">
+		<% if current_user.is_seller %>
+			<h1>Create New Listing</h1><br/>
 
-	<%= form_for :listing, url: listings_path do |f| %>
-	  <p>
-		<%= f.label :address %><br>
-		<%= f.text_field :address %>
-	  </p><br/>
-	  
-	  <p>
-		<%= f.label :start_time %><br>
-		<%= f.datetime_select :start_time %>
-	  </p><br/>
+			<%= form_for :listing, url: listings_path do |f| %>
+			  <p>
+				<%= f.label :address %><br>
+				<%= f.text_field :address %>
+			  </p><br/>
+			  
+			  <p>
+				<%= f.label :start_time %><br>
+				<%= f.datetime_select :start_time %>
+			  </p><br/>
 
-	  <p>
-		<%= f.label :end_time %><br>
-		<%= f.datetime_select :end_time %>
-	  </p><br/>
-	 
-	  <p>
-		<%= f.label :price %><br>
-		<%= f.text_field :price %>
-	  </p><br/>
-	 
-	  <p>
-		<%= f.submit %>
-	  </p><br/>
-	<% end %>
-<% else %>
-	<h1>You are not a seller</h1>
-<% end %>
+			  <p>
+				<%= f.label :end_time %><br>
+				<%= f.datetime_select :end_time %>
+			  </p><br/>
+			 
+			  <p>
+				<%= f.label :price %><br>
+				<%= f.text_field :price %>
+			  </p><br/>
+			 
+			  <p>
+				<%= f.submit %>
+			  </p><br/>
+			<% end %>
+		<% else %>
+			<h1>You are not a seller</h1>
+		<% end %>
+	</div>
 </div>

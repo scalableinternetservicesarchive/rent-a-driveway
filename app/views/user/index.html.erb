@@ -1,21 +1,23 @@
-<div id="content">
-	<% if is_admin(current_user) %>
-		<div id="listing">
-			<table>
-				<tr>
-					<th>Name</th>
-					<th>Email</th>
-					<th>Type</th>
-				</tr>
-				<% @users.each do |user| %>
+<div id="content" class="row">
+	<div class="col-md-offset-1 col-md-10">
+		<% if is_admin(current_user) %>
+			<div id="listing">
+				<table>
 					<tr>
-						<td><%= user.first_name %> <%= user.last_name %></td>
-						<td><%= user.email %></td>
-						<td><%= user.type %></td>
-						<td><%= link_to "Details", user_path(user) %></td>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Type</th>
 					</tr>
-				<% end %>
-			</table>
-		</div>
-	<% end %>
+					<% @users.each do |user| %>
+						<tr>
+							<td><%= user.first_name %> <%= user.last_name %></td>
+							<td><%= user.email %></td>
+							<td><%= user.type %></td>
+							<td><%= link_to "Details", user_path(user) %></td>
+						</tr>
+					<% end %>
+				</table>
+			</div>
+		<% end %>
+	</div>
 </div>

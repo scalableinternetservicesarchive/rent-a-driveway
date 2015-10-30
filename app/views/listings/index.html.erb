@@ -1,9 +1,14 @@
 <div id="content">
-	<h1>All Listings</h1>
-	 <% if current_user.is_seller %>
-		<h3><%= link_to 'New listing', new_listing_path %></h3><br/>
-	<% end %>
-		<div id="listing">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<h1>All Listings</h1>
+			 <% if current_user.is_seller %>
+				<h3><%= link_to 'New listing', new_listing_path %></h3><br/>
+			<% end %>
+		</div>
+	</div>
+	<div id="listing" class="row">
+		<div class="col-md-offset-1 col-md-10">
 			<table>
 			  <tr>
 				<th>Address</th>

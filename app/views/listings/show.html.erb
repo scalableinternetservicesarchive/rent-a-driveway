@@ -3,24 +3,7 @@
 
 <br/>
 <div class="row listing">
-	<div class="col-md-3">
-		<% if !@nearby_listings.blank? %>
-			<h5>Nearby Listings</h5>
-			<% @nearby_listings.each do |nearby_listing| %>
-				<div class="nearby_listing">
-					<%= nearby_listing.address %>
-					<br />
-					$<%= nearby_listing.price %>
-					<br />
-					<%= nearby_listing.distance.round(2) %> miles away
-					<br />
-					<%= link_to "Details", listing_path(nearby_listing) %>
-				</div>
-				<br />
-			<% end %>
-		<% end %>
-	</div>
-	<div class="col-md-9">
+	<div class="col-md-offset-1 col-md-7">
 		<div id="listing">
 			<table>
 			  <tr>
@@ -61,6 +44,23 @@
 			<% end %>
 			<div id="map" style="height: 500px;"></div>
 		</div>
+	</div>
+	<div class="col-md-3">
+		<% if !@nearby_listings.blank? %>
+			<h5>Nearby Listings</h5>
+			<% @nearby_listings.each do |nearby_listing| %>
+				<div class="nearby_listing">
+					<%= nearby_listing.address %>
+					<br />
+					$<%= nearby_listing.price %>
+					<br />
+					<%= nearby_listing.distance.round(2) %> miles away
+					<br />
+					<%= link_to "Details", listing_path(nearby_listing) %>
+				</div>
+				<br />
+			<% end %>
+		<% end %>
 	</div>
 </div>
 

@@ -13,56 +13,64 @@
 </head>
 <body>
 <div id="content">
-
   <div id="header">
-    <div class="topong">
-      <div class="pad"> <%= image_tag("account.gif", alt:"Account") %>
-    		<% if user_signed_in? %>
-              <h4><%= link_to('MY ACCOUNT', user_path(current_user)) %></h4>
-    		<% else %>
-    		  <h4><%= link_to('LOGIN', new_user_session_path) %></h4>
-    		<% end %>
-        <% if user_signed_in? %>
-          <span class="txt"><%= current_user.first_name %> <%= current_user.last_name %></span> 
-        <% end %>
+    <div class="row">
+      <div class="col-md-9">
+        <h1><span class="green bigl">R</span>ent-A-<span class="green bigl">D</span>riveway</h1>
+        <span class="slogan">Rent parking space near you!</span>
+      </div>
+      <div class="col-md-3">
+        <div class="pad"> <%= image_tag("account.gif", alt:"Account") %>
+          <% if user_signed_in? %>
+           <h4><%= link_to('MY ACCOUNT', user_path(current_user)) %></h4>
+          <% else %>
+            <h4><%= link_to('LOGIN', new_user_session_path) %></h4>
+          <% end %>
+          <% if user_signed_in? %>
+            <span class="txt"><%= current_user.first_name %> <%= current_user.last_name %></span>
+          <% end %>
+        </div>
       </div>
     </div>
-    <h1><span class="green bigl">R</span>ent-A-<span class="green bigl">D</span>riveway</h1>
-    <span class="slogan">Rent parking space near you!</span> </div>
   <div id="menu">
-    <div class="pad">
-      <div class="submit">
-        <ul>
-          <li><a href="/"><span>HOME</span></a></li>
-		      <li><%= link_to('<span>ABOUT US</span>'.html_safe, '/aboutus') %></li>
-		      <% if user_signed_in? %>
-            <% if is_admin(current_user) %>
-              <li><%= link_to('<span>LISTINGS</span>'.html_safe, '/listings') %></li>
-              <li><%= link_to('<span>USERS</span>'.html_safe, '/user') %></li>
-            <% else %>
-			        <% if is_seller(current_user) %>
-				        <li><%= link_to('<span>SELL</span>'.html_safe, '/listings/new') %></li>
-			        <% end %>
-			        <% if is_buyer(current_user) %>
-				        <li><%= link_to('<span>BUY</span>'.html_safe, '/listings') %></li>
-			        <% end %>
-			        <li><%= link_to('<span>TRANSACTIONS</span>'.html_safe, '/transactions') %></li>
-            <% end %>
-			      <li><%= link_to('<span>LOGOUT</span>'.html_safe, destroy_user_session_path, :method => :delete) %></li>
-		      <% else %>
-			      <li><%= link_to('<span>LOGIN</span>'.html_safe, new_user_session_path) %></li>
-		      <% end %>
-        </ul>
-      </div>
+    <div class="container-fluid">
+      <ul class="nav navbar-nav navbar-left">
+        <li><a href="/"><span>HOME</span></a></li>
+		    <li><%= link_to('<span>ABOUT US</span>'.html_safe, '/aboutus') %></li>
+		    <% if user_signed_in? %>
+          <% if is_admin(current_user) %>
+            <li><%= link_to('<span>LISTINGS</span>'.html_safe, '/listings') %></li>
+            <li><%= link_to('<span>USERS</span>'.html_safe, '/user') %></li>
+          <% else %>
+			      <% if is_seller(current_user) %>
+				      <li><%= link_to('<span>SELL</span>'.html_safe, '/listings/new') %></li>
+			      <% end %>
+			      <% if is_buyer(current_user) %>
+				      <li><%= link_to('<span>BUY</span>'.html_safe, '/listings') %></li>
+			      <% end %>
+			      <li><%= link_to('<span>TRANSACTIONS</span>'.html_safe, '/transactions') %></li>
+          <% end %>
+        <% end %>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+			    <li><%= link_to('<span>LOGOUT</span>'.html_safe, destroy_user_session_path, :method => :delete) %></li>
+		    <% else %>
+			    <li><%= link_to('<span>LOGIN</span>'.html_safe, new_user_session_path) %></li>
+		    <% end %>
+      </ul>
     </div>
   </div>
   <body>
     <%= yield %>
   </body>
-  <div id="footer">
-    <p class="right">Copyright &copy; 2015 Chris, Minh Quan, Yuuma, John</p>
-    <p><a href="/">Home</a> &middot; <a href="../welcome/aboutus">About Us</a><br />
-    </p>
+  <div id="footer row">
+    <div class="col-md-offset-1 col-md-2">
+      <p><a href="/">Home</a> &middot; <a href="../welcome/aboutus">About Us</a></p>
+    </div>
+    <div class="col-md-offset-5 col-md-4">
+      <p class="right">Copyright &copy; 2015 Chris, Minh Quan, Yuuma, John</p>
+    </div>
   </div>
 </div>
 </body>
