@@ -35,7 +35,7 @@
 			  <tr>
 				<td><%= transaction.seller.first_name %> <%= transaction.seller.last_name %></td>
 				<td><%= transaction.listing.address %></td>
-				<td><%= transaction.listing.price %></td>
+				<td><%= sprintf("$%.2f", transaction.listing.price) %></td>
 			  </tr>
 		  <% end %>
 		</table>
