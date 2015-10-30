@@ -1,8 +1,9 @@
 class ListingsController < ApplicationController
+  helper_method :sort_column, :sort_direction
 
   def index
     # @listing = current_user_listings(current_user)
-    @listing = Listing.all
+    @listing = Listing.order(sort_column + " " + sort_direction)
   end
 
   def show
@@ -84,5 +85,13 @@ class ListingsController < ApplicationController
 
     def listing_params
       params.require(:listing).permit(:address, :start_time, :end_time, :price, :listing_image)
+    end
+
+    def sort_column
+      Listing.column_names.include?(params[:sort]) ? params[:sort] : "price"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end

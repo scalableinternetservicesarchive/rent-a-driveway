@@ -9,14 +9,14 @@
 	</div>
 	<div id="listing" class="row">
 		<div class="col-md-offset-1 col-md-10">
-			<table>
+			<table class="sort_table">
 			  <tr>
-				<th>Address</th>
-					<th>Start Time</th>
-					<th>End Time</th>
-					<th>Price</th>
-					<% if is_seller(current_user) %>
-					<th>Status</th>
+				<th><%=sortable "address"%></th>
+					<th><%=sortable "start_time", "Start Time"%></th>
+					<th><%=sortable "end_time", "End Time"%></th>
+					<th><%=sortable "price"%></th>
+					<% if is_buyer(current_user) %>
+					<th><%=sortable "status"%></th>
 					<% end %>
 			  </tr>
 			 
@@ -28,7 +28,7 @@
 							<td><%= listing.end_time.strftime("%B %e %Y %l:00") %></td>
 							<td><%= sprintf("$%.2f", listing.price) %></td>
 							<% if is_buyer(current_user) %>
-							<td><%= listing.status %></td>
+							<td style="text-align: center;"><%= listing.status %></td>
 							<% end %>
 							<td><%= link_to 'Details', listing_path(listing) %></td>
 							<% if owns_listing(current_user, listing) %>

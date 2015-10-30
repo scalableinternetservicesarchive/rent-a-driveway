@@ -133,3 +133,12 @@ float : right;
 	text-align:right; 
 	margin-top: 10px; 
 }
+.sort_table th .current {
+
+}
+.sort_table th .asc {
+
+}
+.sort_table th .desc {
+
+}
