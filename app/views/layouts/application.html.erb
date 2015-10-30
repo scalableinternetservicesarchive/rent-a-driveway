@@ -20,15 +20,17 @@
         <span class="slogan">Rent parking space near you!</span>
       </div>
       <div class="col-md-3">
-        <div class="pad"> <%= image_tag("account.gif", alt:"Account") %>
-          <% if user_signed_in? %>
-           <h4><%= link_to('MY ACCOUNT', user_path(current_user)) %></h4>
-          <% else %>
-            <h4><%= link_to('LOGIN', new_user_session_path) %></h4>
-          <% end %>
-          <% if user_signed_in? %>
-            <span class="txt"><%= current_user.first_name %> <%= current_user.last_name %></span>
-          <% end %>
+		  <div class="topong">
+		    <div class="pad"> <%= image_tag("account.gif", alt:"Account") %>
+		      <% if user_signed_in? %>
+		       <h4><%= link_to('MY ACCOUNT', user_path(current_user)) %></h4>
+		      <% else %>
+		        <h4><%= link_to('LOGIN', new_user_session_path) %></h4>
+		      <% end %>
+		      <% if user_signed_in? %>
+		        <span class="txt"><%= current_user.first_name %> <%= current_user.last_name %></span>
+		      <% end %>
+		    </div>
         </div>
       </div>
     </div>
