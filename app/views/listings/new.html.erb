@@ -8,23 +8,26 @@
 			  <p>
 				<%= f.label :address %><br>
 				<%= f.text_field :address %>
-			  </p><br/>
+			  </p>
 			  
 			  <p>
 				<%= f.label :start_time %><br>
 				<%= f.datetime_select :start_time %>
-			  </p><br/>
+			  </p>
 
 			  <p>
 				<%= f.label :end_time %><br>
 				<%= f.datetime_select :end_time %>
-			  </p><br/>
+			  </p>
 			 
 			  <p>
 				<%= f.label :price %><br>
 				<%= f.text_field :price %>
-			  </p><br/>
-			  <%= f.file_field :listing_image %>
+			  </p>
+			  <p>
+				<%= f.label :image %><br/>
+			  	<%= f.file_field :listing_image %>
+			  </p>
 			  <p>
 				<%= f.submit %>
 			  </p><br/>
