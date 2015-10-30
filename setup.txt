@@ -6,3 +6,5 @@ To set up mysql on your computer:
     5. exit
     6. bin/rake db:create
     
+To set up images:
+	run sudo apt-get install imagemagick -y
