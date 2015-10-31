@@ -11,14 +11,22 @@ class TransactionsController < ApplicationController
     @transaction.listing_id = params[:listing_id]
 
     #add paypal transaction here
+    @client_token = Braintree::ClientToken.generate
+
+
+
     @listing = Listing.find(params[:listing_id])
     @listing.status = 1 # status: closed
     @listing.save
+    
+=begin
     if @transaction.save
       redirect_to '/'
     else
       #change to fail page
       redirect_to '/'
     end
+=end
+
   end
 end
