@@ -5,6 +5,7 @@ class TransactionsController < ApplicationController
   end
 
   def new
+  	@listing = Listing.find(flash[:listing_id])
   	#pass these values to the create action
     flash[:listing_id] = params[:listing_id]
     flash[:seller_id] = params[:seller_id]
@@ -14,16 +15,18 @@ class TransactionsController < ApplicationController
   end
 
   def create
+  	@listing = Listing.find(flash[:listing_id])
+
+  	#send payment info to Braintree
     nonce = params[:payment_method_nonce]
 	render action: :new and return unless nonce
 	result = Braintree::Transaction.sale(
-	  amount: "10.00",
+	  amount: @listing.price,
 	  payment_method_nonce: nonce
 	)
 	if result.success?
 		flash[:notice] =  "Payment accepted!"
 
-		@listing = Listing.find(flash[:listing_id])
 		@listing.status = 1 # status: closed
     	@listing.save
 

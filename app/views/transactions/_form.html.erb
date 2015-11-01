@@ -1,6 +1,6 @@
 <%= form_tag transactions_path, method: "post" do %>
   <div id="dropin"></div>
-  <input type="submit" value="Pay $10">
+  <input type="submit" value=<%= "$#{@listing.price}" %> >
 <% end %>
 
 <script type="text/javascript">
