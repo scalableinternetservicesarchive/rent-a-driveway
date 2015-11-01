@@ -1,21 +1,33 @@
 class ListingsController < ApplicationController
   include ListingsHelper
   helper_method :sort_column, :sort_direction
-  
+
   def index
     @listing_params = session[:listing_search_params]
     if (@listing_params)
       @clauses = search_conditions(@listing_params)
-      puts @listing_params['address']
       @listing = Listing.near(@listing_params['address'].to_s(), 2).where(@clauses.to_s()).order(sort_column + " " + sort_direction)
+      session[:query_start_time] = @query_start_time
+      session[:query_end_time] = @query_end_time
     else
       @listing = Listing.all.order(sort_column + " " + sort_direction)
-    end
+      session[:query_start_time] = nil
+      session[:query_end_time] = nil
+    end 
     session[:listing_search_params] = nil
   end
 
   def show
     @listing = Listing.find(params[:id])
+
+    if (!session[:query_start_time].blank? && !session[:query_end_time].blank? )
+      @query_start_time = DateTime.parse(session[:query_start_time])
+      @query_end_time = DateTime.parse(session[:query_end_time])
+    else
+      @query_start_time = @listing.start_time
+      @query_end_time = @listing.end_time
+    end
+
     @listing_analytics = @listing.listing_analytics
     @nearby_listings = @listing.nearbys(2)
     @listing_analytics_locations = @listing_analytics.listing_analytics_locations

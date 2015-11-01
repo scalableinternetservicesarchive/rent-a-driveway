@@ -39,23 +39,25 @@ private
   end
 
   def preprocess_listing_params(listing_params)
-    start_time = DateTime.strptime("#{listing_params['start_time(1i)']}-#{listing_params['start_time(2i)']}-#{listing_params['start_time(3i)']} #{listing_params[
+    @query_start_time = DateTime.strptime("#{listing_params['start_time(1i)']}-#{listing_params['start_time(2i)']}-#{listing_params['start_time(3i)']} #{listing_params[
       'start_time(4i)']}:#{listing_params['start_time(5i)']}", '%Y-%m-%d %H:%M')
     listing_params.delete('start_time(1i)')
     listing_params.delete('start_time(2i)')
     listing_params.delete('start_time(3i)')
     listing_params.delete('start_time(4i)')
     listing_params.delete('start_time(5i)')
-    listing_params['start_time'] = start_time.to_s(:db)
+    @query_start_time = @query_start_time.to_s(:db)
+    listing_params['start_time'] = @query_start_time
 
-    end_time = DateTime.strptime("#{listing_params['end_time(1i)']}-#{listing_params['end_time(2i)']}-#{listing_params['end_time(3i)']} #{listing_params[
+    @query_end_time = DateTime.strptime("#{listing_params['end_time(1i)']}-#{listing_params['end_time(2i)']}-#{listing_params['end_time(3i)']} #{listing_params[
       'end_time(4i)']}:#{listing_params['end_time(5i)']}", '%Y-%m-%d %H:%M')
     listing_params.delete('end_time(1i)')
     listing_params.delete('end_time(2i)')
     listing_params.delete('end_time(3i)')
     listing_params.delete('end_time(4i)')
     listing_params.delete('end_time(5i)')
-    listing_params['end_time'] = end_time.to_s(:db)
+    @query_end_time = @query_end_time.to_s(:db)
+    listing_params['end_time'] = @query_end_time
   end
 
   def minimum_price_condition(minimum_price)

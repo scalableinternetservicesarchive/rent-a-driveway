@@ -30,6 +30,14 @@ class Listing < ActiveRecord::Base
     @maximum_price
   end
 
+  def query_start_time
+    @query_start_time
+  end
+
+  def query_end_time
+    @query_end_time
+  end
+
   def listings
     @listings = Listing.all
   end
