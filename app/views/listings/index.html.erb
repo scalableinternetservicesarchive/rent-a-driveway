@@ -1,4 +1,25 @@
 <div id="content">
+	<div id="search">
+  	<%= form_for Listing.new , url: '/search', method: :get do |f| %>
+  		<p>
+        <%= f.label :address %><br />
+        <%= f.text_field :address %>
+      </p>
+      <p>
+        <%= f.label :start_time %><br />
+        <%= f.datetime_select :start_time, minute_step: 30 %>
+      </p>
+      <p>
+        <%= f.label :end_time %><br />
+        <%= f.datetime_select :end_time, minute_step: 30 %>
+      </p>
+      <p>Price Range<br />
+        <%= f.text_field :minimum_price, :size => 7 %> -
+        <%= f.text_field :maximum_price, :size => 7  %>
+      </p>
+  		<p><%= f.submit "Search" %></p>
+  	<% end %>
+  </div>
 	<div class="row">
 		<div class="col-md-offset-1 col-md-10">
 			<h1>All Listings</h1>

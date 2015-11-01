@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   post '/' => 'welcome#search_location'
   get '/get_listings' => 'welcome#search_listings', as: :/
-
+  get '/search' => 'listings#search'
   get '/buy/listings/all' => 'listings#show_all', :via => :get
 
   post 'transactions/new' => 'transactions#new'

@@ -1,9 +1,16 @@
 class ListingsController < ApplicationController
-  helper_method :sort_column, :sort_direction
+  include ListingsHelper
 
   def index
-    # @listing = current_user_listings(current_user)
-    @listing = Listing.order(sort_column + " " + sort_direction)
+    @listing_params = session[:listing_search_params]
+    if (@listing_params)
+      @clauses = search_conditions(@listing_params)
+      puts @listing_params['address']
+      @listing = Listing.near(@listing_params['address'].to_s(), 2).where(@clauses.to_s()).order(sort_column + " " + sort_direction)
+    else
+      @listing = Listing.all.order(sort_column + " " + sort_direction)
+    end
+    session[:listing_search_params] = nil
   end
 
   def show
@@ -61,7 +68,8 @@ class ListingsController < ApplicationController
   end
 
   def search
-    redirect_to listings_path 
+    session[:listing_search_params] = listing_params
+    redirect_to listings_path
   end
 
   def log
@@ -84,7 +92,7 @@ class ListingsController < ApplicationController
   private
 
     def listing_params
-      params.require(:listing).permit(:address, :start_time, :end_time, :price, :listing_image)
+      params.require(:listing).permit(:address, :start_time, :end_time, :price, :minimum_price, :maximum_price, :listing_image)
     end
 
     def sort_column
