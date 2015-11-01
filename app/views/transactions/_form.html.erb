@@ -1,0 +1,13 @@
+<%= form_tag transactions_path, method: "post" do %>
+  <div id="dropin"></div>
+  <input type="submit" value=<%= "$#{@listing.price}" %> >
+<% end %>
+
+<script type="text/javascript">
+  function setupBT() {
+    braintree.setup("<%=@client_token%>", 'dropin', {
+      container: 'dropin'
+    });
+  }
+  window.addEventListener("load", setupBT, false);
+</script>

@@ -17,5 +17,6 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require jquery.turbolinks
+//= require braintree
 //= require_tree .
 
