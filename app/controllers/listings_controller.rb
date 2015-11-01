@@ -1,6 +1,7 @@
 class ListingsController < ApplicationController
   include ListingsHelper
-
+  helper_method :sort_column, :sort_direction
+  
   def index
     @listing_params = session[:listing_search_params]
     if (@listing_params)
