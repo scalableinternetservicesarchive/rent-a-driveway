@@ -1,6 +1,7 @@
 require 'geokit'
 
 class WelcomeController < ApplicationController
+  helper_method :sort_column, :sort_direction
     def index
         if params.has_key?(:location) and params.has_key?(:latitude) then
             a=Geokit::Geocoders::GoogleGeocoder.geocode params[:location]
@@ -29,5 +30,15 @@ class WelcomeController < ApplicationController
             marker.lng listing.longitude
             marker.infowindow  "Address: #{listing.address}<br />Price: $#{listing.price}<br /><a href=#{listing_path(listing)}>Details</a>"
         end
+	#TODO: list based on search
+	  @listing = Listing.all.order(sort_column + " " + sort_direction)
+    end
+  private
+    def sort_column
+      Listing.column_names.include?(params[:sort]) ? params[:sort] : "price"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end

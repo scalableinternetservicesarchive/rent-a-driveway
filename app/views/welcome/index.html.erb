@@ -13,54 +13,95 @@
     For more info look for js/search_location.js
 -->
 <div class="row">
-	<div class="col-md-offset-3 col-md-6">
-		<form method="get" id="search_location_form" action="/" >
-			<div id="search_options">
-				<h2 class="green">Search</h2>
-				<div class="row">
-					<div class="col-md-3">
-						<label for="location">Location:</label>
-					</div>
-					<div class="col-md-7">
-						<input class="form-control" type="text" id="location_input" name="location"></input>
-	          <input type="hidden" id="latitude" name="latitude"></input>
-						<input type="hidden" id="longitude" name="longitude"</input>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-3">
-						<label for="start_time">Start time:</label>
-					</div>
-					<div class="col-md-3">
-						<input class="form-control" type="text" id="start_date" name="start_date"></input>
-					</div>
-					<div class="col-md-offset-1 col-md-3">
-						<input class="form-control" type="text" id="start_time" name="start_time"></input>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-3">
-						<label for="end_time">End time:</label>
-					</div>
-					<div class="col-md-3">
-						<input class="form-control" type="text" id="end_date" name="end_date"></input>
-					</div>
-					<div class="col-md-offset-1 col-md-3">
-						<input class="form-control" type="text" id="end_time" name="end_time"></input>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-offset-5 col-md-2">
-						<input type="submit" value="Search">
-					</div>
-		    </div>
-		  </div>
-		</form>
-	</div>
-</div>
-<div class="row">
-	<div class="col-md-offset-2 col-md-8">
+	<div class="col-md-7">
 		<div id="map" style="height: 500px;"></div>
+	</div>
+	<div class="col-md-5">
+		<div class="row">
+			<form method="get" id="search_location_form" action="/" >
+				<div id="search_options">
+					<h2 class="green">Search</h2>
+					<div class="row">
+						<div class="col-md-3">
+							<label for="location">Location:</label>
+						</div>
+						<div class="col-md-7">
+							<input class="form-control" type="text" id="location_input" name="location"></input>
+			      <input type="hidden" id="latitude" name="latitude"></input>
+							<input type="hidden" id="longitude" name="longitude"</input>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3">
+							<label for="start_time">Start Time:</label>
+						</div>
+						<div class="col-md-3">
+							<input class="form-control" type="text" id="start_date" name="start_date"></input>
+						</div>
+						<div class="col-md-offset-1 col-md-3">
+							<input class="form-control" type="text" id="start_time" name="start_time"></input>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3">
+							<label for="end_time">End Time:</label>
+						</div>
+						<div class="col-md-3">
+							<input class="form-control" type="text" id="end_date" name="end_date"></input>
+						</div>
+						<div class="col-md-offset-1 col-md-3">
+							<input class="form-control" type="text" id="end_time" name="end_time"></input>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3">
+							<label for="price_range">Price Range:</label>
+						</div>
+						<div class="col-md-3">
+							<input class="form-control" type="text" id="min_price" name="min_price"></input>
+						</div>
+						<div class="col-md-1"><label>to</label></div>
+						<div class="col-md-3">
+							<input class="form-control" type="text" id="max_price" name="max_price"></input>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-offset-5 col-md-2">
+							<input type="submit" value="Search">
+						</div>
+				</div>
+			  </div>
+			</form>
+		</div>
+		<div id="search" class="row">
+			<div id="listing" class="row">
+				<div class="col-md-12">
+					<table class="sort_table">
+					  <tr>
+						<th><%=sortable "address"%></th>
+							<th><%=sortable "start_time", "Start Time"%></th>
+							<th><%=sortable "end_time", "End Time"%></th>
+							<th><%=sortable "price"%></th>
+							<% if is_buyer(current_user) %>
+							<th><%=sortable "status"%></th>
+							<% end %>
+					  </tr>
+					 
+					  <% @listing.each do |listing| %>
+						  <tr>
+							<td><%= listing.address %></td>
+								<td><%= listing.start_time.strftime("%B %e %Y %l:00") %></td>
+								<td><%= listing.end_time.strftime("%B %e %Y %l:00") %></td>
+								<td><%= sprintf("$%.2f", listing.price) %></td>
+								<% if is_buyer(current_user) %>
+								<td style="text-align: center;"><%= listing.status %></td>
+								<% end %>
+								<td><%= link_to 'Details', listing_path(listing) %></td>
+						  </tr>
+					  <% end %>
+					</table>
+				</div>
+			</div>
 	</div>
 </div>
 
