@@ -20,6 +20,9 @@ This application allows people with extra space in their driveway, and people lo
 
 ![](http://i.imgur.com/8JHSkm9.jpg?1)
 
+In the payments section, use this website for mock credit card numbers.
+http://www.paypalobjects.com/en_US/vhelp/paypalmanager_help/credit_card_numbers.htm 
+
 == README
 
 This README would normally document whatever steps are necessary to get the

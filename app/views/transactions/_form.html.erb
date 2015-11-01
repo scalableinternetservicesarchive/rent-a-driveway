@@ -1,7 +1,7 @@
-<form id="checkout" method="post" action="/">
+<%= form_tag transactions_path, method: "post" do %>
   <div id="dropin"></div>
   <input type="submit" value="Pay $10">
-</form>
+<% end %>
 
 <script type="text/javascript">
   function setupBT() {
@@ -10,5 +10,4 @@
     });
   }
   window.addEventListener("load", setupBT, false);
-  </script>
 </script>
