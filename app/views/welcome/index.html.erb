@@ -26,9 +26,9 @@
 							<label for="location">Location:</label>
 						</div>
 						<div class="col-md-7">
-							<input class="form-control" type="text" id="location_input" name="location"></input>
-			      <input type="hidden" id="latitude" name="latitude"></input>
-							<input type="hidden" id="longitude" name="longitude"</input>
+							<input class="form-control" type="text" id="location_input" name="location"/>
+			                <input type="hidden" id="latitude" name="latitude"/>
+							<input type="hidden" id="longitude" name="longitude"/>
 						</div>
 					</div>
 					<div class="row">
@@ -36,10 +36,10 @@
 							<label for="start_time">Start Time:</label>
 						</div>
 						<div class="col-md-3">
-							<input class="form-control" type="text" id="start_date" name="start_date"></input>
+							<input class="form-control" type="text" id="start_date" name="start_date"/>
 						</div>
 						<div class="col-md-offset-1 col-md-3">
-							<input class="form-control" type="text" id="start_time" name="start_time"></input>
+							<input class="form-control" type="text" id="start_time" name="start_time"/>
 						</div>
 					</div>
 					<div class="row">
@@ -47,10 +47,10 @@
 							<label for="end_time">End Time:</label>
 						</div>
 						<div class="col-md-3">
-							<input class="form-control" type="text" id="end_date" name="end_date"></input>
+							<input class="form-control" type="text" id="end_date" name="end_date"/>
 						</div>
 						<div class="col-md-offset-1 col-md-3">
-							<input class="form-control" type="text" id="end_time" name="end_time"></input>
+							<input class="form-control" type="text" id="end_time" name="end_time"/>
 						</div>
 					</div>
 					<div class="row">
@@ -58,11 +58,11 @@
 							<label for="price_range">Price Range:</label>
 						</div>
 						<div class="col-md-3">
-							<input class="form-control" type="text" id="min_price" name="min_price"></input>
+							<input class="form-control" type="text" id="min_price" name="min_price"/>
 						</div>
 						<div class="col-md-1"><label>to</label></div>
 						<div class="col-md-3">
-							<input class="form-control" type="text" id="max_price" name="max_price"></input>
+							<input class="form-control" type="text" id="max_price" name="max_price"/>
 						</div>
 					</div>
 					<div class="row">
@@ -87,7 +87,7 @@
 							<% end %>
 					  </tr>
 					 
-					  <% @listing.each do |listing| %>
+					  <% @nearby_listings.each do |listing| %>
 						  <tr>
 							<td><%= listing.address %></td>
 								<td><%= listing.start_time.strftime("%B %e %Y %l:00") %></td>
@@ -98,11 +98,12 @@
 								<% end %>
 								<td><%= link_to 'Details', listing_path(listing) %></td>
 						  </tr>
-					  <% end %>
+                      <% end %>
 					</table>
 				</div>
 			</div>
-	</div>
+	    </div>
+    </div>
 </div>
 
 <script>
