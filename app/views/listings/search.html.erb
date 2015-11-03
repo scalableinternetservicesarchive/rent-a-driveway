@@ -1,0 +1,24 @@
+<script>
+$('#listings_row').html("<%= escape_javascript (render partial: 'listings/search_listings') %>");
+$(document).on('click', '#listings_row th a', function() {
+    $.ajax({
+      type: 'GET',
+      url: this.href,
+      dataType: 'html',
+      success: function(data) {
+        $('#listings_row').html(data);
+        $('#markers').ready(function(){
+          handler = Gmaps.build('Google');
+          handler.buildMap({ provider: { Zoom: 13 }, internal: {id: 'map'}}, function(){
+            marker_json = JSON.parse($('#markers').html());
+            markers = handler.addMarkers(marker_json);
+            handler.bounds.extendWith(markers);
+            handler.map.centerOn({ "lat": marker_json[0].lat, "lng": marker_json[0].lng });
+          });
+        });
+        return false;
+      }
+    });
+  return false;
+});
+</script>

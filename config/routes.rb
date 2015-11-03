@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+    get '/search' => 'listings#search'
+
   resources :listings do
     collection do
       get :search
@@ -15,8 +17,8 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   post '/' => 'welcome#search_location'
+  post '/search' => 'listings#search'
   get '/get_listings' => 'welcome#search_listings', as: :/
-  get '/search' => 'listings#search'
   get '/buy/listings/all' => 'listings#show_all', :via => :get
 
   post 'transactions/new' => 'transactions#new'

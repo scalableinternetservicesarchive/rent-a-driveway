@@ -1,0 +1,31 @@
+<div class="row">
+  <div id="map" class="col-md-offset-1 col-md-5" style="height: 500px;"></div>
+  <div id="markers" style="display: none;"><%= @markers.to_json %></div>
+  <div id="listing" class="col-md-5">
+    <% if !@listings.blank? %>
+      <table class="sort_table">
+        <tr>
+          <th><%= sortable("address","Address", @listing_params) %></th>
+          <th><%= sortable("start_time", "Start Time", @listing_params) %></th>
+          <th><%= sortable("end_time", "End Time", @listing_params) %></th>
+          <th><%= sortable("price", "Price", @listing_params) %></th>
+          <% if is_buyer(current_user) %>
+            <th><%= sortable("status", "Status", @listing_params) %></th>
+          <% end %>
+        </tr>
+        <% @listings.each do |listing| %>
+          <tr>
+            <td><%= listing.address %></td>
+            <td><%= listing.start_time.strftime("%B %e %Y %l:00") %></td>
+            <td><%= listing.end_time.strftime("%B %e %Y %l:00") %></td>
+            <td><%= sprintf("$%.2f", listing.price) %></td>
+            <% if is_buyer(current_user) %>
+              <td style="text-align: center;"><%= listing.status %></td>
+            <% end %>
+            <td><%= link_to 'Details', listing_path(listing) %></td>
+          </tr>
+        <% end %>
+      </table>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-md-offset-4 col-md-4">
+    <%= form_tag('/search', id: 'search-form') do %>
+      <div id="search_options">
+        <h2 class="green">Search</h2>
+        <div class="row">
+          <div class="col-md-3">
+            <label for="location">Location:</label>
+          </div>
+          <div class="col-md-7">
+            <input class="form-control" type="text" id="location" name="location"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <label for="start_time">Start Time:</label>
+          </div>
+          <div class="col-md-3">
+            <input class="form-control" type="text" id="start_date" name="start_date"/>
+          </div>
+          <div class="col-md-offset-1 col-md-3">
+            <input class="form-control" type="text" id="start_time" name="start_time"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <label for="end_time">End Time:</label>
+          </div>
+          <div class="col-md-3">
+            <input class="form-control" type="text" id="end_date" name="end_date"/>
+          </div>
+          <div class="col-md-offset-1 col-md-3">
+            <input class="form-control" type="text" id="end_time" name="end_time"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <label for="price_range">Price Range:</label>
+          </div>
+          <div class="col-md-3">
+            <input class="form-control" type="text" id="min_price" name="min_price"/>
+          </div>
+          <div class="col-md-1"><label>to</label></div>
+          <div class="col-md-3">
+            <input class="form-control" type="text" id="max_price" name="max_price"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-offset-5 col-md-2">
+            <%= submit_tag "Search", :name => nil %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

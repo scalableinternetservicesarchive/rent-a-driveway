@@ -35,29 +35,35 @@ module ListingsHelper
   end
 private
   def get_param_names
-    param_names = ["start_time", "end_time", "minimum_price", "maximum_price"]
+    param_names = ["start_date_time", "end_date_time", "minimum_price", "maximum_price"]
   end
 
   def preprocess_listing_params(listing_params)
-    @query_start_time = DateTime.strptime("#{listing_params['start_time(1i)']}-#{listing_params['start_time(2i)']}-#{listing_params['start_time(3i)']} #{listing_params[
-      'start_time(4i)']}:#{listing_params['start_time(5i)']}", '%Y-%m-%d %H:%M')
-    listing_params.delete('start_time(1i)')
-    listing_params.delete('start_time(2i)')
-    listing_params.delete('start_time(3i)')
-    listing_params.delete('start_time(4i)')
-    listing_params.delete('start_time(5i)')
-    @query_start_time = @query_start_time.to_s(:db)
-    listing_params['start_time'] = @query_start_time
+    if !listing_params['start_date'].blank? && !listing_params['start_time'].blank?
+      @query_start_date_time = DateTime.strptime("#{listing_params['start_date']} #{listing_params['start_time']}", '%Y-%m-%d %H:%M')
+      listing_params.delete('start_time')
+      listing_params.delete('start_date')
+      @query_start_date_time = @query_start_date_time.to_s(:db)
+      listing_params['start_date_time'] = @query_start_date_time
+    elsif !listing_params['start_date'].blank?
+      @query_start_date_time = DateTime.strptime("#{listing_params['start_date']}")
+      listing_params.delete('start_date')
+      @query_start_date_time = @query_start_date_time.to_s(:db)
+      listing_params['start_date_time'] = @query_start_date_time
+    end
 
-    @query_end_time = DateTime.strptime("#{listing_params['end_time(1i)']}-#{listing_params['end_time(2i)']}-#{listing_params['end_time(3i)']} #{listing_params[
-      'end_time(4i)']}:#{listing_params['end_time(5i)']}", '%Y-%m-%d %H:%M')
-    listing_params.delete('end_time(1i)')
-    listing_params.delete('end_time(2i)')
-    listing_params.delete('end_time(3i)')
-    listing_params.delete('end_time(4i)')
-    listing_params.delete('end_time(5i)')
-    @query_end_time = @query_end_time.to_s(:db)
-    listing_params['end_time'] = @query_end_time
+    if !listing_params['end_date'].blank? && !listing_params['end_time'].blank?
+      @end_date_time = DateTime.strptime("#{listing_params['end_date']} #{listing_params['end_time']}", '%Y-%m-%d %H:%M')
+      listing_params.delete('end_time')
+      listing_params.delete('end_date')
+      @end_date_time = @end_date_time.to_s(:db)
+      listing_params['end_date_time'] = @end_date_time
+    elsif !listing_params['end_date'].blank?
+      @end_date_time = DateTime.strptime("#{listing_params['end_date']}")
+      listing_params.delete('end_date')
+      @end_date_time = @end_date_time.to_s(:db)
+      listing_params['start_date_time'] = @end_date_time
+    end
   end
 
   def minimum_price_condition(minimum_price)
@@ -68,13 +74,11 @@ private
     "listings.price <= #{maximum_price}"
   end
 
-  def start_time_condition(start_time)
-    start_datetime ||= start_time
-    "listings.start_time <= '#{start_datetime}'"
+  def start_date_time_condition(start_date_time)
+    "listings.end_time <= '#{start_date_time}'"
   end
 
-  def end_time_condition(end_time)
-    end_datetime ||= end_time
-    "listings.end_time >= '#{end_datetime}'"
+  def end_date_time_condition(end_date_time)
+    "listings.end_time >= '#{end_date_time}'"
   end
 end

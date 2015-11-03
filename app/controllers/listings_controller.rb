@@ -1,5 +1,8 @@
 class ListingsController < ApplicationController
   include ListingsHelper
+  include ApplicationHelper
+
+  respond_to :html, :js
 
   def index
 	redirect_to('/')
@@ -8,12 +11,12 @@ class ListingsController < ApplicationController
   def show
     @listing = Listing.find(params[:id])
 
-    if (!session[:query_start_time].blank? && !session[:query_end_time].blank? )
-      @query_start_time = DateTime.parse(session[:query_start_time])
-      @query_end_time = DateTime.parse(session[:query_end_time])
+    if (!session[:query_start_date_time].blank? && !session[:query_end_date_time].blank? )
+      @query_start_date_time = DateTime.parse(session[:query_start_date_time])
+      @query_end_date_time = DateTime.parse(session[:query_end_date_time])
     else
-      @query_start_time = @listing.start_time
-      @query_end_time = @listing.end_time
+      @query_start_date_time = @listing.start_time
+      @query_end_date_time = @listing.end_time
     end
 
     @listing_analytics = @listing.listing_analytics
@@ -69,8 +72,19 @@ class ListingsController < ApplicationController
   end
 
   def search
-    session[:listing_search_params] = listing_params
-    redirect_to listings_path
+    @listing_params = params.slice(:address, :start_date, :start_time, :end_date, :end_time, :minimum_price, :maximum_price)
+    if (@listing_params)
+      @clauses = search_conditions(@listing_params)
+      puts @listing_params[:address]
+      @listings = Listing.near(@listing_params['address'].to_s(), 2).where(@clauses.to_s()).reorder(sort_column + " " + sort_direction)
+      session[:query_start_date_time] = @query_start_date_time
+      session[:query_end_date_time] = @query_end_date_time
+      @markers = Gmaps4rails.build_markers(@listings) do |listing, marker|
+        marker.lat listing.latitude
+        marker.lng listing.longitude
+        marker.infowindow  "Address: #{listing.address}<br />Price: $#{listing.price}<br /><a href=#{listing_path(listing)}>Details</a>"
+      end
+    end
   end
 
   def log
@@ -91,7 +105,6 @@ class ListingsController < ApplicationController
   end
 
   private
-
     def listing_params
       params.require(:listing).permit(:address, :start_time, :end_time, :price, :minimum_price, :maximum_price, :listing_image)
     end
