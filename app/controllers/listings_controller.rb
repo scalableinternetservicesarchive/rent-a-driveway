@@ -79,10 +79,16 @@ class ListingsController < ApplicationController
       @listings = Listing.near(@listing_params['address'].to_s(), 2).where(@clauses.to_s()).reorder(sort_column + " " + sort_direction)
       session[:query_start_date_time] = @query_start_date_time
       session[:query_end_date_time] = @query_end_date_time
+      chld = 0
       @markers = Gmaps4rails.build_markers(@listings) do |listing, marker|
+        chld += 1
         marker.lat listing.latitude
         marker.lng listing.longitude
+        marker.picture({ :url => "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=#{chld}|EE1111|FFFFFF",
+                         :width => 21,
+                         :height => 34 })
         marker.infowindow  "Address: #{listing.address}<br />Price: $#{listing.price}<br /><a href=#{listing_path(listing)}>Details</a>"
+        listing.address = chld
       end
     end
   end

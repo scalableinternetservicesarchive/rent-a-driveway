@@ -5,7 +5,7 @@
     <% if !@listings.blank? %>
       <table class="sort_table">
         <tr>
-          <th><%= sortable("address","Address", @listing_params) %></th>
+          <th style="width: 5%; padding-left: 0px; padding-right: 0px;">#</th>
           <th><%= sortable("start_time", "Start Time", @listing_params) %></th>
           <th><%= sortable("end_time", "End Time", @listing_params) %></th>
           <th><%= sortable("price", "Price", @listing_params) %></th>
@@ -15,7 +15,7 @@
         </tr>
         <% @listings.each do |listing| %>
           <tr>
-            <td><%= listing.address %></td>
+            <td style="text-align: center"><%= listing.address %></td>
             <td><%= listing.start_time.strftime("%B %e %Y %l:00") %></td>
             <td><%= listing.end_time.strftime("%B %e %Y %l:00") %></td>
             <td><%= sprintf("$%.2f", listing.price) %></td>
