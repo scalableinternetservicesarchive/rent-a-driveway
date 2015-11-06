@@ -15,8 +15,8 @@
 				  </tr>
 				  <tr>
 						<td><%= @listing.address %></td>
-						<td><%= @query_start_time.strftime("%B %e %Y %l:00") %></td>
-						<td><%= @query_end_time.strftime("%B %e %Y %l:00") %></td>
+						<td><%= @query_start_date_time.strftime("%B %e %Y %l:00") %></td>
+						<td><%= @query_end_date_time.strftime("%B %e %Y %l:00") %></td>
 						<td><%= sprintf("$%.2f", @listing.price) %></td>
 						<% if user_can_buy(current_user, @listing) %>
 						  <td align="center"><%= button_to "Buy", new_transaction_path(:listing_id => @listing.id, :seller_id => @listing.owner_id) %></td>
