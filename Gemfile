@@ -26,7 +26,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'jquery-turbolinks'
 
 # used for payments
-gem "braintree"
+gem 'braintree'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -75,7 +75,7 @@ private
   end
 
   def start_date_time_condition(start_date_time)
-    "listings.end_time <= '#{start_date_time}'"
+    "listings.start_time <= '#{start_date_time}'"
   end
 
   def end_date_time_condition(end_date_time)
