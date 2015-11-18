@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="Rails rent-a-driveway: development" uuid="18cb6767-1b56-431a-b8f2-1be67c951844">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source name="Rails rent-a-driveway: test" uuid="6d0c844d-88b6-4216-9fec-6fad145c11cc">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source name="Rails rent-a-driveway: production" uuid="e8b45131-5edb-4e76-b21b-71778f85f54c">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+</component>
