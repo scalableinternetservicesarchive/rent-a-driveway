@@ -1,0 +1,19 @@
+This folder is meant to be kept on branch loadtest only, not on any other branch.
+
+To use this branch:
+    1. Merge latest master branch to loadtest branch then push
+
+    2. Open cloud formation and create new stack with MySinglePassenger.json as the template.
+        That file is modifed to checkout the code from loadtest branch not master
+        The URL for the file is this:
+        https://raw.githubusercontent.com/scalableinternetservices/rent-a-driveway/loadtest/loadtest/MySinglePassenger.json
+
+    3. Open cloud formation and create new Tsung stack like normal
+        Checkout the rent-a-driveway git repo into that new EC2 instance and switch to branch loadtest
+        
+    4. Fix the server path on the loadtest/*.xml files
+
+    5. Start load test with
+        tsung -f <something>.xml start
+
+
