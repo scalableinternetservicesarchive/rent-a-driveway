@@ -8,4 +8,6 @@
 
 50.times { Fabricate(:listing_analytic) }
 50.times { Fabricate(:user, is_buyer: true) }
-1.times { Fabricate(:user, is_admin: true, email: "admin@rad.com") }
+if not User.where(email: 'admin@rad.com')
+    1.times { Fabricate(:user, is_admin: true, email: "admin@rad.com") }
+end

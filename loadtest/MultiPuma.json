@@ -1,27 +1,91 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Outputs": {
-        "SSH": {
-            "Description": "AppServer SSH connect string",
-            "Value": {
-                "Fn::Join": [
-                    "",
-                    [
-                        "ssh -i ",
-                        {
-                            "Ref": "TeamName"
-                        },
-                        ".pem ec2-user@",
-                        {
-                            "Fn::GetAtt": [
-                                "AppServer",
-                                "PublicDnsName"
-                            ]
-                        }
-                    ]
-                ]
+    "Mappings": {
+        "Teams": {
+            "403-Studio": {
+                "sg": "sg-88a6cbec"
+            },
+            "ABCs": {
+                "sg": "sg-e9a6cb8d"
+            },
+            "BiteMi": {
+                "sg": "sg-0f67206b"
+            },
+            "EEGO": {
+                "sg": "sg-86a6cbe2"
+            },
+            "Filmo": {
+                "sg": "sg-93a6cbf7"
+            },
+            "Foodies": {
+                "sg": "sg-fa06699e"
+            },
+            "GreatReads": {
+                "sg": "sg-d2a7cab6"
+            },
+            "Happening": {
+                "sg": "sg-7da1cc19"
+            },
+            "J10": {
+                "sg": "sg-aaa6cbce"
+            },
+            "MINT": {
+                "sg": "sg-32a6cb56"
+            },
+            "PASSion": {
+                "sg": "sg-91a7caf5"
+            },
+            "Pickachu": {
+                "sg": "sg-1ea6cb7a"
+            },
+            "ScaleTheTAB": {
+                "sg": "sg-b0a6cbd4"
+            },
+            "Scrailibility": {
+                "sg": "sg-50157a34"
+            },
+            "TeamUp": {
+                "sg": "sg-4ea6cb2a"
+            },
+            "boiling-crab": {
+                "sg": "sg-2ea6cb4a"
+            },
+            "demo": {
+                "sg": "sg-a40665c0"
+            },
+            "hitchhike": {
+                "sg": "sg-06a6cb62"
+            },
+            "infinity-1": {
+                "sg": "sg-99a6cbfd"
+            },
+            "lolcounter": {
+                "sg": "sg-cda7caa9"
+            },
+            "nil": {
+                "sg": "sg-70a1cc14"
+            },
+            "poll": {
+                "sg": "sg-f8fb979c"
+            },
+            "rent-a-driveway": {
+                "sg": "sg-0fa6cb6b"
+            },
+            "segmentation-fault": {
+                "sg": "sg-6fa1cc0b"
+            },
+            "sis-admin-InstanceSecurityGroup-PR56J7YARYKB": {
+                "sg": "sg-fc395a98"
+            },
+            "smile-inc": {
+                "sg": "sg-e7a7ca83"
+            },
+            "team-up": {
+                "sg": "sg-ce0e61aa"
             }
-        },
+        }
+    },
+    "Outputs": {
         "URL": {
             "Description": "The URL to the rails application.",
             "Value": {
@@ -31,8 +95,8 @@
                         "http://",
                         {
                             "Fn::GetAtt": [
-                                "AppServer",
-                                "PublicDnsName"
+                                "LoadBalancer",
+                                "DNSName"
                             ]
                         }
                     ]
@@ -66,9 +130,41 @@
             "Description": "The AppServer instance type.",
             "Type": "String"
         },
+        "AppInstances": {
+            "Default": 2,
+            "Description": "The number of AppServer instances to launch.",
+            "MaxValue": 8,
+            "MinValue": 1,
+            "Type": "Number"
+        },
         "Branch": {
-            "Default": "loadtest",
+            "Default": "master",
             "Description": "The git branch to deploy.",
+            "Type": "String"
+        },
+        "DBInstanceType": {
+            "AllowedValues": [
+                "db.t1.micro",
+                "db.m1.small",
+                "db.m1.medium",
+                "db.m1.large",
+                "db.m1.xlarge",
+                "db.m2.xlarge",
+                "db.m2.2xlarge",
+                "db.m2.4xlarge",
+                "db.m3.medium",
+                "db.m3.large",
+                "db.m3.xlarge",
+                "db.m3.2xlarge",
+                "db.c1.medium",
+                "db.c1.xlarge",
+                "db.c3.large",
+                "db.c3.xlarge",
+                "db.c3.2xlarge",
+                "db.c3.4xlarge"
+            ],
+            "Default": "db.t1.micro",
+            "Description": "The Database instance type.",
             "Type": "String"
         },
         "ProcessParallelism": {
@@ -126,23 +222,40 @@
         }
     },
     "Resources": {
-        "AppServer": {
+        "AppGroup": {
             "CreationPolicy": {
                 "ResourceSignal": {
-                    "Timeout": "PT40M"
+                    "Count": {
+                        "Ref": "AppInstances"
+                    },
+                    "Timeout": "PT20M"
                 }
             },
+            "Properties": {
+                "AvailabilityZones": {
+                    "Fn::GetAZs": ""
+                },
+                "LaunchConfigurationName": {
+                    "Ref": "AppServer"
+                },
+                "LoadBalancerNames": [
+                    {
+                        "Ref": "LoadBalancer"
+                    }
+                ],
+                "MaxSize": {
+                    "Ref": "AppInstances"
+                },
+                "MinSize": {
+                    "Ref": "AppInstances"
+                }
+            },
+            "Type": "AWS::AutoScaling::AutoScalingGroup"
+        },
+        "AppServer": {
             "Metadata": {
                 "AWS::CloudFormation::Init": {
                     "app": {
-                        "services": {
-                            "sysvinit": {
-                                "mysqld": {
-                                    "enabled": true,
-                                    "ensureRunning": true
-                                }
-                            }
-                        },
                         "sources": {
                             "/home/ec2-user/app": {
                                 "Fn::Join": [
@@ -196,7 +309,22 @@
                     "user": {
                         "files": {
                             "/home/ec2-user/app/config/database.yml": {
-                                "content": "production:\n  adapter: mysql2\n  database: rails_app\n",
+                                "content": {
+                                    "Fn::Join": [
+                                        "",
+                                        [
+                                            "production:\n  adapter: mysql2\n  database: rails_app\n",
+                                            "  host: ",
+                                            {
+                                                "Fn::GetAtt": [
+                                                    "Database",
+                                                    "Endpoint.Address"
+                                                ]
+                                            },
+                                            "\n  password: password\n"
+                                        ]
+                                    ]
+                                },
                                 "group": "ec2-user",
                                 "owner": "ec2-user"
                             }
@@ -230,7 +358,7 @@
                                 {
                                     "Ref": "AWS::StackName"
                                 },
-                                "       --resource AppServer --region ",
+                                "       --resource AppGroup --region ",
                                 {
                                     "Ref": "AWS::Region"
                                 },
@@ -248,21 +376,24 @@
                                 "\n",
                                 "# Update alternatives\nalternatives --set ruby /usr/bin/ruby2.2 || error_exit 'Failed ruby2.2 default'\n# Install bundler only after the alternatives have been set.\ngem install bundle || error_exit 'Failed to install bundle'\n# Update user's path if it hasn't been set already\necho \"export PATH=/usr/local/bin:\\$PATH\" >> /home/ec2-user/.bashrc\n",
                                 "# Change to the app directory\ncd /home/ec2-user/app\n# Add environment variables to ec2-user's .bashrc\nexport RAILS_ENV=production\necho \"export RAILS_ENV=production\" >> ../.bashrc\necho \"export SECRET_KEY_BASE=b801783afb83bb8e614b32ccf6c05c855a927116d92062a75c6ffa61d58c58e62f13eb60cf1a31922c44b7e6a3e8f1809934a93llask938bl\" >> ../.bashrc\n\n# Redirect port 80 to port 3000 (ec2-user cannot bind port 80)\niptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000\n\n# Run the app specific ec2 initialization\nif [ -f .ec2_initialize ]; then\n    sudo -u ec2-user bash -l .ec2_initialize     || error_exit 'Failed to run .ec2_initialize'\nfi\n\n# Add gems needed on production\necho -e \"\ngem 'therubyracer', platforms: :ruby \" >> Gemfile\necho -e \"\ngem 'mysql2', '~> 0.3.13', platforms: :ruby \" >> Gemfile\necho -e \"\ngem 'therubyrhino', platforms: :jruby \" >> Gemfile\necho -e \"\ngem 'activerecord-jdbc-adapter', platforms: :jruby \" >> Gemfile\necho -e \"\ngem 'multi_json'\" >> Gemfile\n\n# Run the remaining commands as the ec2-user in the app directory\nuser_sudo bundle install --without test development || error_exit 'Failed to install bundle'\n# Create the database and run the migrations (try up to 10x)\nloop=10\nwhile [ $loop -gt 0 ]; do\n  user_sudo rake db:create db:migrate\n  if [ $? -eq 0 ]; then\n    loop=-1\n  else\n    sleep 6\n    loop=$(expr $loop - 1)\n  fi\ndone\nif [ $loop -eq 0 ]; then\n  error_exit 'Failed to execute database migration'\nfi\n# Run the app specific ec2 initialization\nif [ -f .rails_initialize ]; then\n    sudo -u ec2-user bash -l .rails_initialize     || error_exit 'Failed to run .rails_initialize'\nfi\n# Generate static assets\nuser_sudo rake assets:precompile || error_exit 'Failed to precompile static assets'\n",
-                                "# Install Passenger\ngem install passenger rake || error_exit 'Failed to install passenger gems'\n# Add swap space needed to build passenger if running on t1.micro\nif [ \"",
+                                "# Configure the app to serve static assets\necho -e \"\ngem 'puma' \" >> /home/ec2-user/app/Gemfile\ncd /home/ec2-user/app\nif [ '",
                                 {
-                                    "Ref": "AppInstanceType"
+                                    "Ref": "RubyVM"
                                 },
-                                "\" == \"t1.micro\" ]; then\n  dd if=/dev/zero of=/swap bs=1M count=512   || error_exit 'Failed to create swap file'\n  mkswap /swap || error_exit 'Failed to mkswap'\n  swapon /swap || error_exit 'Failed to enable swap'\nfi\n# Build and install passenger\nuser_sudo /usr/local/bin/passenger start --runtime-check-only || error_exit 'Failed to build or install passenger'\nif [ \"",
+                                "' == 'JRuby' ]; then\n  gpg --keyserver hkp://keys.gnupg.net   --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3\n  curl -sSL https://get.rvm.io | bash -s stable\n  echo \"source /home/ec2-user/.profile\" >> /home/ec2-user/.bash_profile\n  source /home/ec2-user/.profile\n  rvm install jruby-1.7.19\n  rvm --default use jruby-1.7.19\n  sudo yum install mysql-connector-java\n  echo \"\\$CLASSPATH ||= [] \" >> config/application.rb;\n  echo \"\\$CLASSPATH << '/usr/share/java/mysql-connector-java.jar'\"    >> config/application.rb;\nfi\nuser_sudo \"bundle install\"\nuser_sudo RAILS_SERVE_STATIC_FILES=true bundle exec puma -t ",
                                 {
-                                    "Ref": "AppInstanceType"
+                                    "Ref": "ThreadParallelism"
                                 },
-                                "\" == \"t1.micro\" ]; then\n  swapoff /swap || error_exit 'Failed to disable swap'\n  rm /swap || error_exit 'Failed to delete /swap'\nfi\n",
-                                "# Start passenger\nuser_sudo passenger start -d --no-compile-runtime || error_exit 'Failed to start passenger'\n",
+                                " -w ",
+                                {
+                                    "Ref": "ProcessParallelism"
+                                },
+                                " -p 3000 -d || error_exit 'Failed to start rails server'\n",
                                 "# All is well so signal success\n/opt/aws/bin/cfn-signal -e 0 --stack ",
                                 {
                                     "Ref": "AWS::StackName"
                                 },
-                                " --resource AppServer   --region ",
+                                " --resource AppGroup   --region ",
                                 {
                                     "Ref": "AWS::Region"
                                 },
@@ -272,7 +403,73 @@
                     }
                 }
             },
-            "Type": "AWS::EC2::Instance"
+            "Type": "AWS::AutoScaling::LaunchConfiguration"
+        },
+        "Database": {
+            "Properties": {
+                "AllocatedStorage": 5,
+                "BackupRetentionPeriod": 0,
+                "DBInstanceClass": {
+                    "Ref": "DBInstanceType"
+                },
+                "DBInstanceIdentifier": {
+                    "Ref": "AWS::StackName"
+                },
+                "DBName": "rails_app",
+                "Engine": "mysql",
+                "MasterUserPassword": "password",
+                "MasterUsername": "root",
+                "VPCSecurityGroups": [
+                    {
+                        "Fn::FindInMap": [
+                            "Teams",
+                            {
+                                "Ref": "TeamName"
+                            },
+                            "sg"
+                        ]
+                    }
+                ]
+            },
+            "Type": "AWS::RDS::DBInstance"
+        },
+        "LoadBalancer": {
+            "Properties": {
+                "AvailabilityZones": {
+                    "Fn::GetAZs": ""
+                },
+                "LBCookieStickinessPolicy": [
+                    {
+                        "CookieExpirationPeriod": 30,
+                        "PolicyName": "CookiePolicy"
+                    }
+                ],
+                "Listeners": [
+                    {
+                        "InstancePort": 3000,
+                        "LoadBalancerPort": 80,
+                        "PolicyNames": [
+                            "CookiePolicy"
+                        ],
+                        "Protocol": "http"
+                    }
+                ],
+                "LoadBalancerName": {
+                    "Ref": "AWS::StackName"
+                },
+                "SecurityGroups": [
+                    {
+                        "Fn::FindInMap": [
+                            "Teams",
+                            {
+                                "Ref": "TeamName"
+                            },
+                            "sg"
+                        ]
+                    }
+                ]
+            },
+            "Type": "AWS::ElasticLoadBalancing::LoadBalancer"
         }
     }
 }
