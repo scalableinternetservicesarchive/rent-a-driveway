@@ -1,0 +1,153 @@
+
+=INFO REPORT==== 3-Dec-2015::17:48:27 ===
+    ts_config_server:(5:<0.39.0>) Config server started, logdir is "/home/ec2-user/.tsung/log/20151203-1748"
+ 
+=INFO REPORT==== 3-Dec-2015::17:48:27 ===
+              ts_mon:(5:<0.38.0>) starting monitor, global 
+
+=INFO REPORT==== 3-Dec-2015::17:48:27 ===
+           ts_config:(5:<0.39.0>) Reading config file: view_pages.xml
+
+=INFO REPORT==== 3-Dec-2015::17:48:27 ===
+      ts_config_http:(4:<0.39.0>) Get user agent: 100 "Mozilla/5.0 (Windows; U; Windows NT 5.2; fr-FR; rv:1.7.8) Gecko/20050511 Firefox/1.0.4" 
+
+=INFO REPORT==== 3-Dec-2015::17:48:27 ===
+           ts_config:(5:<0.39.0>) Session name for id 1 is "http-example"
+
+=INFO REPORT==== 3-Dec-2015::17:48:27 ===
+    ts_config_server:(4:<0.39.0>) SYSINFO:Tsung version: 1.5.0
+
+=INFO REPORT==== 3-Dec-2015::17:48:27 ===
+    ts_config_server:(4:<0.39.0>) SYSINFO:Erlang version: Erlang R16B03-1 (erts-5.10.4) [source] [64-bit] [smp:4:4] [async-threads:16] [hipe] [kernel-poll:true]
+
+
+=INFO REPORT==== 3-Dec-2015::17:48:27 ===
+    ts_config_server:(4:<0.39.0>) SYSINFO:System architecture x86_64-unknown-linux-gnu
+
+=INFO REPORT==== 3-Dec-2015::17:48:27 ===
+    ts_config_server:(4:<0.39.0>) SYSINFO:Current path: /home/ec2-user/opt/tsung-1.5.0/lib/erlang/lib/tsung-1.5.0/ebin/tsung.beam
+
+=INFO REPORT==== 3-Dec-2015::17:48:27 ===
+           ts_os_mon:(5:<0.36.0>) os_mon disabled
+=INFO REPORT==== 3-Dec-2015::17:48:27 ===
+              ts_mon:(5:<0.40.0>) Activate clients with text backend
+
+=INFO REPORT==== 3-Dec-2015::17:48:27 ===
+              ts_mon:(5:<0.40.0>) Starting tsung clients on hosts: [localhost]
+
+=INFO REPORT==== 3-Dec-2015::17:48:27 ===
+    ts_config_server:(5:<0.39.0>) Start a launcher on the controller beam localhost
+
+=INFO REPORT==== 3-Dec-2015::17:48:27 ===
+  ts_launcher_static:(5:<0.73.0>) Launch msg receive ("localhost")
+
+=INFO REPORT==== 3-Dec-2015::17:48:27 ===
+         ts_launcher:(5:<0.74.0>) Launch msg receive ("localhost")
+
+=INFO REPORT==== 3-Dec-2015::17:48:27 ===
+    ts_config_server:(5:<0.39.0>) All remote beams started, syncing 
+
+=INFO REPORT==== 3-Dec-2015::17:48:27 ===
+    ts_config_server:(5:<0.39.0>) New arrival phase 1 for client "localhost" (last ? true): will start 10 users
+
+=INFO REPORT==== 3-Dec-2015::17:48:27 ===
+    ts_config_server:(5:<0.39.0>) New arrival phase 2 for client "localhost" (last ? true): will start 20 users
+
+=INFO REPORT==== 3-Dec-2015::17:48:27 ===
+    ts_config_server:(5:<0.39.0>) New arrival phase 3 for client "localhost" (last ? true): will start 40 users
+
+=INFO REPORT==== 3-Dec-2015::17:48:27 ===
+    ts_config_server:(5:<0.39.0>) New arrival phase 4 for client "localhost" (last ? true): will start 80 users
+
+=INFO REPORT==== 3-Dec-2015::17:48:27 ===
+    ts_config_server:(5:<0.39.0>) New arrival phase 5 for client "localhost" (last ? true): will start 160 users
+
+=INFO REPORT==== 3-Dec-2015::17:48:27 ===
+    ts_config_server:(5:<0.39.0>) New arrival phase 6 for client "localhost" (last ? true): will start 320 users
+
+=INFO REPORT==== 3-Dec-2015::17:48:27 ===
+    ts_config_server:(5:<0.39.0>) New arrival phase 7 for client "localhost" (last ? true): will start 640 users
+
+=INFO REPORT==== 3-Dec-2015::17:48:27 ===
+    ts_config_server:(5:<0.39.0>) New arrival phase 8 for client "localhost" (last ? true): will start 1280 users
+
+=INFO REPORT==== 3-Dec-2015::17:48:27 ===
+    ts_config_server:(5:<0.39.0>) New arrival phase 9 for client "localhost" (last ? true): will start 2560 users
+
+=INFO REPORT==== 3-Dec-2015::17:48:27 ===
+         ts_launcher:(5:<0.74.0>) Expected duration of first phase: 10.0 sec (10 users) 
+
+=INFO REPORT==== 3-Dec-2015::17:48:28 ===
+         ts_launcher:(5:<0.74.0>) Activate launcher (10 users) in 11176 msec 
+
+=INFO REPORT==== 3-Dec-2015::17:48:46 ===
+         ts_launcher:(4:<0.74.0>) Need to wait 2.363 sec before changing phase, going to sleep
+
+=INFO REPORT==== 3-Dec-2015::17:48:49 ===
+         ts_launcher:(5:<0.74.0>) Waking up
+
+=INFO REPORT==== 3-Dec-2015::17:48:49 ===
+         ts_launcher:(5:<0.74.0>) Start a new arrival phase (20 users, 0.002); expected duration=10.0 sec
+
+=INFO REPORT==== 3-Dec-2015::17:49:00 ===
+         ts_launcher:(5:<0.74.0>) Start a new arrival phase (40 users, 0.004); expected duration=10.0 sec
+
+=INFO REPORT==== 3-Dec-2015::17:49:08 ===
+         ts_launcher:(4:<0.74.0>) Need to wait 1.132 sec before changing phase, going to sleep
+
+=INFO REPORT==== 3-Dec-2015::17:49:10 ===
+         ts_launcher:(5:<0.74.0>) Waking up
+
+=INFO REPORT==== 3-Dec-2015::17:49:10 ===
+         ts_launcher:(5:<0.74.0>) Start a new arrival phase (80 users, 0.008); expected duration=10.0 sec
+
+=INFO REPORT==== 3-Dec-2015::17:49:20 ===
+         ts_launcher:(5:<0.74.0>) Phase duration exceeded, but not all users were launched (14 users, 17.5% of phase)
+
+=INFO REPORT==== 3-Dec-2015::17:49:20 ===
+         ts_launcher:(5:<0.74.0>) Start a new arrival phase (160 users, 0.016); expected duration=10.0 sec
+
+=INFO REPORT==== 3-Dec-2015::17:49:30 ===
+         ts_launcher:(5:<0.74.0>) Phase duration exceeded, but not all users were launched (20 users, 12.5% of phase)
+
+=INFO REPORT==== 3-Dec-2015::17:49:30 ===
+         ts_launcher:(5:<0.74.0>) Start a new arrival phase (320 users, 0.032); expected duration=10.0 sec
+
+=INFO REPORT==== 3-Dec-2015::17:49:40 ===
+         ts_launcher:(5:<0.74.0>) Phase duration exceeded, but not all users were launched (12 users, 3.8% of phase)
+
+=INFO REPORT==== 3-Dec-2015::17:49:40 ===
+         ts_launcher:(5:<0.74.0>) Start a new arrival phase (640 users, 0.064); expected duration=10.0 sec
+
+=INFO REPORT==== 3-Dec-2015::17:49:50 ===
+         ts_launcher:(4:<0.74.0>) Need to wait 0.193 sec before changing phase, going to sleep
+
+=INFO REPORT==== 3-Dec-2015::17:49:50 ===
+         ts_launcher:(5:<0.74.0>) Waking up
+
+=INFO REPORT==== 3-Dec-2015::17:49:50 ===
+         ts_launcher:(5:<0.74.0>) Start a new arrival phase (1280 users, 0.128); expected duration=10.0 sec
+
+=INFO REPORT==== 3-Dec-2015::17:50:00 ===
+         ts_launcher:(5:<0.74.0>) Phase duration exceeded, but not all users were launched (23 users, 1.8% of phase)
+
+=INFO REPORT==== 3-Dec-2015::17:50:00 ===
+         ts_launcher:(5:<0.74.0>) Start a new arrival phase (2560 users, 0.256); expected duration=10.0 sec
+
+=INFO REPORT==== 3-Dec-2015::17:50:10 ===
+         ts_launcher:(5:<0.74.0>) Phase duration exceeded, but not all users were launched (118 users, 4.6% of phase)
+
+=INFO REPORT==== 3-Dec-2015::17:50:10 ===
+         ts_launcher:(5:<0.74.0>) This was the last phase, wait for connected users to finish their session
+
+=INFO REPORT==== 3-Dec-2015::17:50:10 ===
+     ts_launcher_mgr:(5:<0.69.0>) Still 3482 active client(s)
+
+=INFO REPORT==== 3-Dec-2015::17:51:10 ===
+     ts_launcher_mgr:(5:<0.69.0>) Still 731 active client(s)
+
+=INFO REPORT==== 3-Dec-2015::17:52:10 ===
+     ts_launcher_mgr:(5:<0.69.0>) No more active users 'tsung_controller@ip-172-31-27-144' "1934"
+
+=INFO REPORT==== 3-Dec-2015::17:52:10 ===
+              ts_mon:(5:<0.40.0>) stopping monitor (normal)
