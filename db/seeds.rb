@@ -9,6 +9,6 @@
 if User.where(email: "admin@rad.com").blank?
     1.times { Fabricate(:user, is_admin: true, email: "admin@rad.com") }
     print "seeding database"
-    500.times { Fabricate(:listing) }
+    50.times { Fabricate(:listing) }
     50.times { Fabricate(:user, is_buyer: true) }
 end
