@@ -446,7 +446,7 @@
                 ],
                 "Listeners": [
                     {
-                        "InstancePort": 3000,
+                        "InstancePort": 80,
                         "LoadBalancerPort": 80,
                         "PolicyNames": [
                             "CookiePolicy"

@@ -6,8 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-50.times { Fabricate(:listing_analytic) }
-50.times { Fabricate(:user, is_buyer: true) }
-if not User.where(email: 'admin@rad.com')
+if User.where(email: "admin@rad.com").blank?
     1.times { Fabricate(:user, is_admin: true, email: "admin@rad.com") }
+    print "seeding database"
+    50.times { Fabricate(:listing_analytic) }
+    50.times { Fabricate(:user, is_buyer: true) }
 end
