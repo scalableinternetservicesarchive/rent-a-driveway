@@ -21,7 +21,9 @@ class ListingsController < ApplicationController
 
     @listing_analytics = @listing.listing_analytics
     @nearby_listings = @listing.nearbys(2)
-    @listing_analytics_locations = @listing_analytics.listing_analytics_locations
+    if (!@listing_analytics.blank?)
+      @listing_analytics_locations = @listing_analytics.listing_analytics_locations
+    end
     @hash = Gmaps4rails.build_markers(@listing) do |listing, marker|
       marker.lat listing.latitude
       marker.lng listing.longitude
