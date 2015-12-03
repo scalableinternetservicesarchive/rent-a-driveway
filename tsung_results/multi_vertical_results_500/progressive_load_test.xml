@@ -1,0 +1,98 @@
+<?xml version="1.0"?><tsung loglevel="notice" version="1.0">
+
+  <clients>
+    <client host="localhost" use_controller_vm="true" maxusers="15000"/>
+  </clients>
+
+  <servers>
+    <server host="ec2-52-35-97-117.us-west-2.compute.amazonaws.com" port="80" type="tcp"/>
+  </servers>
+
+
+  <load>
+    <arrivalphase phase="1" duration="15" unit="second">
+      <users arrivalrate="1" unit="second"/>
+    </arrivalphase>
+
+    <arrivalphase phase="2" duration="15" unit="second">
+      <users arrivalrate="0.5" unit="second"/>
+    </arrivalphase>
+
+    <arrivalphase phase="3" duration="15" unit="second">
+      <users arrivalrate="0.25" unit="second"/>
+    </arrivalphase>
+  </load>
+
+  <options>
+    <option name="global_ack_timeout" value="2000"/>
+
+    <option type="ts_http" name="user_agent">
+      <user_agent probability="100">Mozilla/5.0 (Windows; U; Windows NT 5.2; fr-FR; rv:1.7.8) Gecko/20050511 Firefox/1.0.4</user_agent>
+    </option>
+  </options>
+
+  <sessions>
+    <session name="http-example" probability="100" type="ts_http">
+      <request>
+        <http url="/" version="1.1" method="GET"/>
+      </request>
+
+      <thinktime value="3" random="true"/>
+
+      <request>
+        <http url="/users/sign_in" version="1.1" method="GET"/>
+      </request>
+
+      <request>
+        <http url="/users/sign_in" version="1.1" method="POST" contents="user%5Bremember_me%5D=1&amp;user%5Bemail%5D=admin%40rad.com&amp;user%5Bpassword%5D=password">
+        </http>
+      </request>
+
+      <request>
+        <http url="/" version="1.1" method="GET"/>
+      </request>
+
+      <thinktime value="3" random="true"/>
+
+      <request>
+        <http url="/search" version="1.1" method="POST" contents="address=90024"/>
+      </request>
+
+      <thinktime value="10" random="true"/>
+
+      <request>
+        <http url="/search" version="1.1" method="POST" contents="address=90024&amp;start_date=2015-12-20&amp;start_time=1%3A30am&amp;end_date=2015-12-23&amp;end_time=2%3A30am&amp;minimum_price=100&amp;maximum_price=400"/>
+      </request>
+
+      <setdynvars sourcetype="random_number" start="1" end="50">
+        <var name="listing_id"/>
+      </setdynvars>
+
+      <setdynvars sourcetype="random_number" start="1" end="50">
+        <var name="listing_id_1"/>
+      </setdynvars>
+
+      <setdynvars sourcetype="random_number" start="1" end="50">
+        <var name="listing_id_2"/>
+      </setdynvars>
+
+      <request subst="true">
+        <http url="/listings/%%_listing_id%%" version="1.1" method="GET"/>
+      </request>
+
+      <thinktime value="10" random="true"/>
+
+      <request subst="true">
+        <http url="/listings/%%_listing_id_1%%" version="1.1" method="GET"/>
+      </request>
+
+      <thinktime value="10" random="true"/>
+
+      <request subst="true">
+        <http url="/listings/%%_listing_id_2%%" version="1.1" method="GET"/>
+      </request>
+
+      <thinktime value="10" random="true"/>
+    </session>
+  </sessions>
+</tsung>
