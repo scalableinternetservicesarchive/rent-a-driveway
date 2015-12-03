@@ -8,5 +8,5 @@
 
 if User.where(email: "admin@rad.com").blank?
     1.times { Fabricate(:user, is_admin: true, email: "admin@rad.com") }
-    500.times { Fabricate(:listing) }
+    5000.times { Fabricate(:listing) }
 end
