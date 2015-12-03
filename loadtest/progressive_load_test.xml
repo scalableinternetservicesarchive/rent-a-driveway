@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<!DOCTYPE tsung SYSTEM "/home/ec2-user/opt/tsung-1.5.0/share/tsung/tsung-1.0.dtd">
+<tsung loglevel="notice" version="1.0">
+
+  <!-- Client side setup -->
+  <clients>
+    <client host="localhost" use_controller_vm="true" maxusers='15000'/>
+  </clients>
+
+  <!-- Server side setup -->
+  <servers>
+    <server host="ec2-52-35-97-117.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
+  </servers>
+
+
+  <load>
+    <arrivalphase phase="1" duration="15" unit="second">
+      <users arrivalrate="1" unit="second"></users>
+    </arrivalphase>
+
+    <arrivalphase phase="2" duration="15" unit="second">
+      <users arrivalrate="2" unit="second"></users>
+    </arrivalphase>
+
+    <arrivalphase phase="3" duration="15" unit="second">
+      <users arrivalrate="4" unit="second"></users>
+    </arrivalphase>
+
+    <arrivalphase phase="4" duration="15" unit="second">
+      <users arrivalrate="6" unit="second"></users>
+    </arrivalphase>
+
+    <arrivalphase phase="5" duration="15" unit="second">
+      <users arrivalrate="10" unit="second"></users>
+    </arrivalphase>
+
+    <arrivalphase phase="6" duration="15" unit="second">
+      <users arrivalrate="16" unit="second"></users>
+    </arrivalphase>
+
+    <arrivalphase phase="7" duration="15" unit="second">
+      <users arrivalrate="22" unit="second"></users>
+    </arrivalphase>
+
+    <arrivalphase phase="8" duration="15" unit="second">
+      <users arrivalrate="30" unit="second"></users>
+    </arrivalphase>
+
+  </load>
+
+  <options>
+    <!-- Set connection timeout to 2 seconds -->
+    <option name="global_ack_timeout" value="2000"></option>
+
+    <option type="ts_http" name="user_agent">
+      <user_agent probability="100">Mozilla/5.0 (Windows; U; Windows NT 5.2; fr-FR; rv:1.7.8) Gecko/20050511 Firefox/1.0.4</user_agent>
+    </option>
+  </options>
+
+  <sessions>
+    <session name="http-example" probability="100" type="ts_http">
+      <request>
+        <http url='/' version='1.1' method='GET'></http>
+      </request>
+
+      <thinktime value="3" random="true"></thinktime>
+
+      <request>
+        <http url="/users/sign_in" version="1.1" method="GET"/>
+      </request>
+
+      <request>
+        <http
+          url='/users/sign_in'
+          version='1.1'
+          method='POST'
+          contents='user%5Bremember_me%5D=1&amp;user%5Bemail%5D=admin%40rad.com&amp;user%5Bpassword%5D=password'>
+        </http>
+      </request>
+
+      <request>
+        <http url='/' version='1.1' method='GET'></http>
+      </request>
+
+      <thinktime value="3" random="true"></thinktime>
+
+      <request>
+        <http url='/search' version='1.1' method='POST' contents='address=90024'></http>
+      </request>
+
+      <thinktime value="10" random="true"></thinktime>
+
+      <request>
+        <http url='/search' version='1.1' method='POST' contents='address=90024&amp;start_date=2015-12-20&amp;start_time=1%3A30am&amp;end_date=2015-12-23&amp;end_time=2%3A30am&amp;minimum_price=100&amp;maximum_price=400' ></http>
+      </request>
+
+      <setdynvars sourcetype="random_number" start="1" end="50">
+        <var name="listing_id"></var>
+      </setdynvars>
+
+      <setdynvars sourcetype="random_number" start="1" end="50">
+        <var name="listing_id_1"></var>
+      </setdynvars>
+
+      <setdynvars sourcetype="random_number" start="1" end="50">
+        <var name="listing_id_2"></var>
+      </setdynvars>
+
+      <request subst="true">
+        <http url='/listings/%%_listing_id%%' version="1.1" method="GET"></http>
+      </request>
+
+      <thinktime value="10" random="true"></thinktime>
+
+      <request subst="true">
+        <http url='/listings/%%_listing_id_1%%' version="1.1" method="GET"></http>
+      </request>
+
+      <thinktime value="10" random="true"></thinktime>
+
+      <request subst="true">
+        <http url='/listings/%%_listing_id_2%%' version="1.1" method="GET"></http>
+      </request>
+
+      <thinktime value="10" random="true"></thinktime>
+    </session>
+  </sessions>
+</tsung>
