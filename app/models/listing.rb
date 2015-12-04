@@ -9,7 +9,7 @@ class Listing < ActiveRecord::Base
   has_many :transactions, :class_name => 'Transaction', :foreign_key => 'listing_id'
 
    geocoded_by :address
-  # after_validation :geocode
+  after_validation :geocode
   enum status: [:OPEN, :PENDING, :CLOSED]
   has_attached_file :listing_image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "listing_images/default.png"
   validates_attachment_content_type :listing_image, :content_type => %w(image/jpeg image/jpg image/png)
