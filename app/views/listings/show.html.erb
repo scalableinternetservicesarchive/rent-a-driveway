@@ -5,47 +5,42 @@
 <div class="row listing">
 	<div class="col-md-offset-1 col-md-8">
 		<div id="listing" class="row">
-			<div class="col-md-8">
-				<table>
-				  <tr>
-						<th>Address</th>
-						<th>Start Time</th>
-						<th>End Time</th>
-						<th>Price</th>
-				  </tr>
-				  <tr>
-						<td><%= @listing.address %></td>
-						<td><%= @query_start_date_time.strftime("%B %e %Y %l:00") %></td>
-						<td><%= @query_end_date_time.strftime("%B %e %Y %l:00") %></td>
-						<td><%= sprintf("$%.2f", @listing.price) %></td>
-						<% if user_can_buy(current_user, @listing) %>
-						  <td align="center"><%= button_to "Buy", new_transaction_path(:listing_id => @listing.id, :seller_id => @listing.owner_id) %></td>
-						<% end %>
-				  </tr>
-				</table>
-				<br/>
-				<br/>
+			<table>
+			  <tr>
+					<th>Address</th>
+					<th>Start Time</th>
+					<th>End Time</th>
+					<th>Price</th>
+			  </tr>
+			  <tr>
+					<td><%= @listing.address %></td>
+					<td><%= @query_start_date_time.strftime("%B %e %Y %l:00") %></td>
+					<td><%= @query_end_date_time.strftime("%B %e %Y %l:00") %></td>
+					<td><%= sprintf("$%.2f", @listing.price) %></td>
+					<% if user_can_buy(current_user, @listing) %>
+					  <td align="center"><%= button_to "Buy", new_transaction_path(:listing_id => @listing.id, :seller_id => @listing.owner_id) %></td>
+					<% end %>
+			  </tr>
+			</table>
+			<br/>
+			<br/>
 
-				<% if is_admin(current_user) && !@listing_analytics_locations.blank? %>
-				  <table>
-						<tr>
-						  <th>IP</th>
-						  <th>Latitude</th>
-						  <th>Longitude</th>
-						</tr>
-						<% @listing_analytics_locations.each do |locations| %>
-						  <tr>
-								<td>TODO@yuuma</td>
-								<td><%= locations.latitude %></td>
-								<td><%= locations.longitude %></td>
-						  </tr>
-						<% end %>
-				  	</table>
-				<% end %>
-			</div>
-			<div class="col-md-4">
-				<%= image_tag @listing.listing_image.url, size: "250" %>
-			</div>
+			<% if is_admin(current_user) && !@listing_analytics_locations.blank? %>
+			  <table>
+					<tr>
+					  <th>IP</th>
+					  <th>Latitude</th>
+					  <th>Longitude</th>
+					</tr>
+					<% @listing_analytics_locations.each do |locations| %>
+					  <tr>
+							<td>TODO@yuuma</td>
+							<td><%= locations.latitude %></td>
+							<td><%= locations.longitude %></td>
+					  </tr>
+					<% end %>
+			  	</table>
+			<% end %>
 		</div>
 		<div id="map" style="height: 500px;"></div>
 	</div>
